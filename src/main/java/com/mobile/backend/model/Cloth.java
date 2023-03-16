@@ -2,6 +2,10 @@ package com.mobile.backend.model;
 
 import java.util.List;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.mobile.backend.model.cart.CartItem;
+import com.mobile.backend.model.order.OrderItem;
+
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -12,6 +16,7 @@ import jakarta.persistence.JoinColumn;
 import jakarta.persistence.JoinTable;
 import jakarta.persistence.ManyToMany;
 import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
@@ -24,7 +29,7 @@ import lombok.Setter;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-@Table(name = "cloths")
+@Table(name = "clothes")
 public class Cloth {
 
 	@Id
@@ -58,4 +63,13 @@ public class Cloth {
 	@ManyToOne
 	@JoinColumn(name="category_id",referencedColumnName = "id")
 	private Category category;
+	
+	@OneToMany(mappedBy = "cloth")
+	@JsonIgnore
+	private List<CartItem> cart;
+	
+	@OneToMany(mappedBy = "cloth")
+	@JsonIgnore
+	private List<OrderItem> orderItems;
+	
 }

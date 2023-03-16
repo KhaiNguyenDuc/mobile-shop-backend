@@ -3,6 +3,7 @@ package com.mobile.backend;
 
 import java.time.LocalDate;
 import java.util.Arrays;
+import java.util.Date;
 import java.util.List;
 
 import org.junit.jupiter.api.MethodOrderer.OrderAnnotation;
@@ -20,16 +21,26 @@ import com.mobile.backend.model.Category;
 import com.mobile.backend.model.Cloth;
 import com.mobile.backend.model.Inventory;
 import com.mobile.backend.model.Size;
+import com.mobile.backend.model.cart.Cart;
+import com.mobile.backend.model.cart.CartItem;
+import com.mobile.backend.model.order.OrderItem;
+import com.mobile.backend.model.order.OrderTrack;
 import com.mobile.backend.model.user.Role;
 import com.mobile.backend.model.user.RoleName;
 import com.mobile.backend.model.user.User;
 import com.mobile.backend.repository.BrandRepository;
+import com.mobile.backend.repository.CartItemRepository;
+import com.mobile.backend.repository.CartRepository;
 import com.mobile.backend.repository.CategoryRepository;
 import com.mobile.backend.repository.ClothRepository;
 import com.mobile.backend.repository.InventoryRepository;
+import com.mobile.backend.repository.OrderItemRepository;
+import com.mobile.backend.repository.OrderRepository;
+import com.mobile.backend.repository.OrderTrackRepository;
 import com.mobile.backend.repository.RoleRepository;
 import com.mobile.backend.repository.SizeRepository;
 import com.mobile.backend.repository.UserRepository;
+import com.mobile.backend.untils.AppConstant;
 
 @SpringBootTest
 @AutoConfigureTestDatabase(replace = Replace.NONE)
@@ -57,6 +68,21 @@ public class InsertData {
 	
 	@Autowired
 	CategoryRepository categoryRepository;
+	
+	@Autowired
+	CartItemRepository cartItemRepository;
+	
+	@Autowired
+	CartRepository cartRepository;
+	
+	@Autowired
+	OrderRepository orderRepository;
+	
+	@Autowired
+	OrderItemRepository orderItemRepository;
+	
+	@Autowired
+	OrderTrackRepository orderTrackRepository;
 
 	@Test
 	@Order(1)
@@ -72,28 +98,8 @@ public class InsertData {
 	
 	}
 	
-	@Order(2)
-	@Test
-	public void addUsers() {
-		
-		Role roleAdmin = roleRepository.findByName(RoleName.ADMIN);
-		Role roleUser = roleRepository.findByName(RoleName.USER);
-		
-		User user = new User();
-		user.setUsername("admin");
-		user.setPassword("123");
-		user.setAddress("241, Nguyễn Trãi, Lái Thiêu, Thuận An, Bình Dương");
-		user.setEmail("duckhailinux@gmail.com");
-		user.setBirthday(LocalDate.of(2002,6,12));
-		user.setFirstName("khai");
-		user.setLastName("nguyen");
-		user.setPhoneNumber("0783511740");
-		user.setEnabled(Boolean.TRUE);
-		user.setRoles(Arrays.asList(roleAdmin));
-		userRepository.save(user);
-	}
 	
-	@Order(3)
+	@Order(2)
 	@Test
 	public void addBrand() {
 		
@@ -123,7 +129,7 @@ public class InsertData {
 		brandRepository.save(brandMoiDien);
 	}
 	
-	@Order(4)
+	@Order(3)
 	@Test
 	public void addSize() {
 		Size sizeM = new Size();
@@ -148,7 +154,7 @@ public class InsertData {
 		
 	}
 	
-	@Order(5)
+	@Order(4)
 	@Test
 	public void addCategory() {
 		
@@ -171,7 +177,7 @@ public class InsertData {
 		
 	}
 	
-	@Order(6)
+	@Order(5)
 	@Test
 	public void addCloth() {
 		
@@ -321,7 +327,153 @@ public class InsertData {
 		cloth12.setInventory(new Inventory(5));
 		cloth12.setCategory(formalWear);
 		clothRepository.save(cloth12);
+	}
+	
+	@Order(6)
+	@Test
+	public void addCart() {
 
+		Cart cartKhai = new Cart();
+		cartKhai.setUser(null);
+		cartRepository.save(cartKhai);
+	}
+	
+	@Order(7)
+	@Test
+	public void addCartItem() {
+		
+		// Get cloths
+		Cloth cloth1 = clothRepository.findById(1L).get();
+		Cloth cloth2 = clothRepository.findById(2L).get();
+		Cloth cloth3 = clothRepository.findById(3L).get();
+		Cloth cloth4 = clothRepository.findById(4L).get();
+		Cloth cloth5 = clothRepository.findById(5L).get();
+		Cloth cloth6 = clothRepository.findById(6L).get();
+		Cloth cloth7 = clothRepository.findById(7L).get();
+		// For user Khai
+		Cart cartKhai = cartRepository.findById(1L).get();
+		
+		CartItem cartItem1 = new CartItem();
+		cartItem1.setCloth(cloth1);
+		cartItem1.setCart(cartKhai);
+		cartItem1.setQuantity(1);
+		cartItemRepository.save(cartItem1);
+		
+		CartItem cartItem2 = new CartItem();
+		cartItem2.setCloth(cloth2);
+		cartItem2.setCart(cartKhai);
+		cartItem2.setQuantity(2);
+		cartItemRepository.save(cartItem2);
+		
+		CartItem cartItem3 = new CartItem();
+		cartItem3.setCloth(cloth3);
+		cartItem3.setCart(cartKhai);
+		cartItem3.setQuantity(3);
+		cartItemRepository.save(cartItem3);
+	}
+	
 
+	
+	@Order(8)
+	@Test
+	public void addUsers() {
+		
+		Role roleAdmin = roleRepository.findByName(RoleName.ADMIN);
+		Role roleUser = roleRepository.findByName(RoleName.USER);
+		
+		Cart cartKhai = cartRepository.findById(1L).get();
+		
+		
+		User userKhai = new User();
+		userKhai.setUsername("admin");
+		userKhai.setPassword("123");
+		userKhai.setAddress("241, Nguyễn Trãi, Lái Thiêu, Thuận An, Bình Dương");
+		userKhai.setEmail("duckhailinux@gmail.com");
+		userKhai.setBirthday(LocalDate.of(2002,6,12));
+		userKhai.setFirstName("khai");
+		userKhai.setLastName("nguyen");
+		userKhai.setPhoneNumber("0783511740");
+		userKhai.setEnabled(Boolean.TRUE);
+		userKhai.setRoles(Arrays.asList(roleUser));
+		userKhai.setCart(cartKhai);
+		userRepository.save(userKhai);
+		
+	}
+	
+	@Order(9)
+	@Test
+	public void addOrderTrack() {
+		
+		// Payment process
+		OrderTrack trackPaymentProcess = new OrderTrack();
+		trackPaymentProcess.setStatus(AppConstant.PAYMENT_PROCESS);
+		orderTrackRepository.save(trackPaymentProcess);
+		
+		// Delivery
+		OrderTrack trackDelivering = new OrderTrack();
+		trackDelivering.setStatus(AppConstant.DELIVERING);
+		orderTrackRepository.save(trackDelivering);
+
+		// Preparing
+		OrderTrack trackPreparing = new OrderTrack();
+		trackPreparing.setStatus(AppConstant.PREPARING);
+		orderTrackRepository.save(trackPreparing);
+
+		// Completed
+		OrderTrack trackCompleted = new OrderTrack();
+		trackCompleted.setStatus(AppConstant.COMPLETED);
+		orderTrackRepository.save(trackCompleted);
+	}
+	
+	@Order(10)
+	@Test
+	public void addOrder() {
+		
+		User userKhai = userRepository.findById(1L).get();
+		
+		OrderTrack trackDelivering = orderTrackRepository.findByStatus(AppConstant.DELIVERING);
+		
+		com.mobile.backend.model.order.Order orderKhai = new com.mobile.backend.model.order.Order();
+		orderKhai.setOrderDate(new Date());
+		orderKhai.setDeliverCost(AppConstant.STANDARD_COST);
+		orderKhai.setDeliverMethod(AppConstant.STANDARD);
+		orderKhai.setOrderTrack(trackDelivering);
+		orderKhai.setUser(userKhai);
+		orderKhai.setOrderItems(null);
+		orderRepository.save(orderKhai);
+	}
+	
+	
+	@Order(11)
+	@Test
+	public void addOrderItem() {
+		
+		
+		Cloth cloth1 = clothRepository.findById(1L).get();
+		Cloth cloth2 = clothRepository.findById(2L).get();
+		Cloth cloth3 = clothRepository.findById(3L).get();
+		
+		
+		
+		com.mobile.backend.model.order.Order orderKhai = orderRepository.findById(1L).get();
+		
+	
+		OrderItem orderItem1 = new OrderItem();
+		orderItem1.setQuantity(2);
+		orderItem1.setCloth(cloth1);
+		orderItem1.setOrder(orderKhai);
+		orderItemRepository.save(orderItem1);
+		
+		OrderItem orderItem2 = new OrderItem();
+		orderItem2.setQuantity(2);
+		orderItem2.setCloth(cloth2);
+		orderItem2.setOrder(orderKhai);
+		orderItemRepository.save(orderItem2);
+		
+		OrderItem orderItem3 = new OrderItem();
+		orderItem3.setQuantity(2);
+		orderItem3.setCloth(cloth3);
+		orderItem3.setOrder(orderKhai);
+		orderItemRepository.save(orderItem3);
 	}
 }

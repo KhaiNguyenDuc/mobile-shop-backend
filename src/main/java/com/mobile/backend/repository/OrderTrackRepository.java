@@ -6,4 +6,6 @@ import com.mobile.backend.model.order.OrderTrack;
 
 public interface OrderTrackRepository extends JpaRepository<OrderTrack, Long>{
 
+	OrderTrack findByStatus(String delivering);
+
 }

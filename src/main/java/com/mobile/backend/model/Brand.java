@@ -34,5 +34,5 @@ public class Brand {
 	
 	@OneToMany(mappedBy = "brand", fetch = FetchType.LAZY)
 	@JsonIgnore
-	private List<Cloth> cloths;
+	private List<Cloth> clothes;
 }

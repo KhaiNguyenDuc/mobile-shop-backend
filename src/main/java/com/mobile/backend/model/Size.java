@@ -12,6 +12,7 @@ import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.JoinTable;
 import jakarta.persistence.ManyToMany;
+import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -22,6 +23,7 @@ import lombok.Setter;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
+@Table(name = "sizes")
 public class Size {
 
 	@Id
@@ -37,5 +39,5 @@ public class Size {
 			name="cloth_size",
 			joinColumns = @JoinColumn(name="size_id"),
 			inverseJoinColumns = @JoinColumn(name="cloth_id"))
-	private List<Cloth> cloths;
+	private List<Cloth> clothes;
 }

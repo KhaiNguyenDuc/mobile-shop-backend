@@ -1,10 +1,10 @@
 package com.mobile.backend.payload;
 
-import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-import com.mobile.backend.model.user.Role;
+import com.mobile.backend.model.cart.Cart;
+import com.mobile.backend.model.order.Order;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -25,24 +25,10 @@ public class UserResponse {
 	private Boolean enabled;
 	private Date birthday;
 	private String address;
+	private Cart cart;
+	private List<Order> orders;
 	private String image;
 
-	private List<Role> roles;
 
-	public Boolean isEnabled() {
-		return this.enabled;
-	}
-
-	public List<Role> getRoles() {
-		return roles == null ? null : new ArrayList<>(this.roles);
-	}
-
-	public void setRoles(List<Role> roles) {
-		if (roles == null) {
-			this.roles = null;
-		} else {
-			this.roles = roles;
-		}
-
-	}
+	
 }

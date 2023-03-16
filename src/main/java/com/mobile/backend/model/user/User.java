@@ -3,6 +3,10 @@ package com.mobile.backend.model.user;
 import java.time.LocalDate;
 import java.util.List;
 
+import com.mobile.backend.model.cart.Cart;
+import com.mobile.backend.model.order.Order;
+
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -11,6 +15,8 @@ import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.JoinTable;
 import jakarta.persistence.ManyToMany;
+import jakarta.persistence.OneToMany;
+import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
 import lombok.Getter;
 import lombok.Setter;
@@ -58,6 +64,13 @@ public class User {
 			joinColumns = @JoinColumn(name = "user_id"),
 			inverseJoinColumns = @JoinColumn(name = "role_id"))
 	private List<Role> roles;
+	
+	@OneToOne
+	@JoinColumn(name = "cart_id", referencedColumnName = "id")
+	private Cart cart;
+	
+	@OneToMany(mappedBy = "user",cascade = CascadeType.ALL,orphanRemoval = true)
+	private List<Order> orders;
 
 
 
