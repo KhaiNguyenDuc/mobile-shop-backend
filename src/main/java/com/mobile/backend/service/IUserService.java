@@ -4,6 +4,8 @@ import java.util.List;
 
 import com.mobile.backend.payload.CartResponse;
 import com.mobile.backend.payload.OrderResponse;
+import com.mobile.backend.payload.UserProfileResponse;
+import com.mobile.backend.payload.UserRequest;
 import com.mobile.backend.payload.UserResponse;
 
 public interface IUserService {
@@ -15,5 +17,7 @@ public interface IUserService {
 	CartResponse getCartByUserId(Long userId);
 
 	List<OrderResponse> getOrdersByUserId(Long userId);
+
+	UserProfileResponse createUser(UserRequest userRequest);
 
 }

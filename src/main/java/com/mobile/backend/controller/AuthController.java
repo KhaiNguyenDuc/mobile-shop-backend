@@ -14,11 +14,13 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.mobile.backend.payload.JwtResponse;
 import com.mobile.backend.payload.LoginRequest;
+import com.mobile.backend.payload.UserProfileResponse;
+import com.mobile.backend.payload.UserRequest;
 import com.mobile.backend.security.JwtTokenProvider;
 import com.mobile.backend.service.IUserService;
 
-@RequestMapping
-@RestController("api/v1/auth")
+@RestController
+@RequestMapping("api/v1/auth")
 public class AuthController {
 
 	@Autowired
@@ -40,5 +42,13 @@ public class AuthController {
 		String token = tokenProvider.generateToken(auth);
 		SecurityContextHolder.getContext().setAuthentication(auth);
 		return new ResponseEntity<>(new JwtResponse(token,"jwt"),HttpStatus.OK);
+	}
+	
+	@PostMapping("/register")
+	public ResponseEntity<UserProfileResponse> register(
+			@RequestBody UserRequest userRequest
+			){
+		UserProfileResponse userProfile = userService.createUser(userRequest);
+		return new ResponseEntity<>(userProfile,HttpStatus.CREATED);
 	}
 }

@@ -26,4 +26,11 @@ public class AppConstant {
 	public static final String ORDER_ITEM_NOT_FOUND = "Not found order item with id: ";
 	public static final String CLOTH_NOT_FOUND = "Not found cloth with id: ";
 	public static final String SIZE_NOT_FOUND = "Not found size with id: ";
+	
+	public static final String CLOTH_EXIST = "This cloth already exist in database";
+	public static final String CART_EXIST = "This cart already exist in database";
+	public static final String BRAND_EXIST = "This brand already exist in database";
+	public static final String CATEGORY_EXIST = "This category already exist in database with id: ";
+	public static final String USER_EXIST = "This user already exist in database";
+	public static final String ROLE_WITH_USER_EXIST = "This role already set to this user";
 }
