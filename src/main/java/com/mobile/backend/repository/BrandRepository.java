@@ -6,4 +6,6 @@ import com.mobile.backend.model.Brand;
 
 public interface BrandRepository extends JpaRepository<Brand, Long> {
 
+	Brand findByName(String string);
+
 }

@@ -6,12 +6,12 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
-import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-import jakarta.persistence.OneToMany;
-import jakarta.persistence.Table;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.JoinTable;
+import jakarta.persistence.ManyToMany;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -22,8 +22,7 @@ import lombok.Setter;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-@Table(name = "brands")
-public class Brand {
+public class Size {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY )
@@ -32,7 +31,11 @@ public class Brand {
 	@Column(name="name")
 	private String name;
 	
-	@OneToMany(mappedBy = "brand", fetch = FetchType.LAZY)
 	@JsonIgnore
+	@ManyToMany
+	@JoinTable(
+			name="cloth_size",
+			joinColumns = @JoinColumn(name="size_id"),
+			inverseJoinColumns = @JoinColumn(name="cloth_id"))
 	private List<Cloth> cloths;
 }

@@ -9,20 +9,19 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.mobile.backend.payload.UserResponse;
-import com.mobile.backend.service.IUserService;
+import com.mobile.backend.payload.ClothResponse;
+import com.mobile.backend.service.IClothService;
 
 @RestController
-@RequestMapping("api/v1/users")
-public class UserController {
+@RequestMapping("api/v1/cloths")
+public class ClothController {
 
 	@Autowired
-	IUserService userService;
+	IClothService clothService;
 	
 	@GetMapping
-	public ResponseEntity<List<UserResponse>> getUsers(){
-		
-		List<UserResponse> users = userService.getAllUsers();
-		return new ResponseEntity<>(users,HttpStatus.OK);
+	public ResponseEntity<List<ClothResponse>> getAllCloths(){
+		List<ClothResponse> cloths = clothService.getAllCloths();
+		return new ResponseEntity<>(cloths,HttpStatus.OK);
 	}
 }

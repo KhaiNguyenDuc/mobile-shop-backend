@@ -6,4 +6,6 @@ import com.mobile.backend.model.Category;
 
 public interface CategoryRepository extends JpaRepository<Category, Long> {
 
+	Category findByName(String string);
+
 }
