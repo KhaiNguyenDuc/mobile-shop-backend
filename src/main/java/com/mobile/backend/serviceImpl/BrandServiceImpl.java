@@ -7,6 +7,7 @@ import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.mobile.backend.Exception.ResourceNotFoundException;
 import com.mobile.backend.model.Brand;
 import com.mobile.backend.model.Cloth;
 import com.mobile.backend.payload.BrandResponse;
@@ -14,6 +15,7 @@ import com.mobile.backend.payload.ClothResponse;
 import com.mobile.backend.repository.BrandRepository;
 import com.mobile.backend.repository.ClothRepository;
 import com.mobile.backend.service.IBrandService;
+import com.mobile.backend.untils.AppConstant;
 
 @Service
 public class BrandServiceImpl implements IBrandService{
@@ -37,7 +39,8 @@ public class BrandServiceImpl implements IBrandService{
 
 	@Override
 	public BrandResponse getBrandById(Long brandId) {
-		Brand brand = brandRepository.findById(brandId).get();
+		Brand brand = brandRepository.findById(brandId)
+				.orElseThrow(() -> new ResourceNotFoundException(AppConstant.BRAND_NOT_FOUND+brandId));
 		BrandResponse brandResponse = mapper.map(brand, BrandResponse.class);
 		return brandResponse;
 		
@@ -45,7 +48,8 @@ public class BrandServiceImpl implements IBrandService{
 
 	@Override
 	public List<ClothResponse> getClothesByBrandId(Long brandId) {
-		Brand brand = brandRepository.findById(brandId).get();
+		Brand brand = brandRepository.findById(brandId)
+				.orElseThrow(() -> new ResourceNotFoundException(AppConstant.BRAND_NOT_FOUND+brandId));
 		List<Cloth> clothes = clothRepository.findByBrand(brand);
 		List<ClothResponse> clothResponses = 
 				Arrays.asList(mapper.map(clothes, ClothResponse[].class));

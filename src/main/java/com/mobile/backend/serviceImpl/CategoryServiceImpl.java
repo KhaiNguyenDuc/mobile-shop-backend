@@ -7,6 +7,7 @@ import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.mobile.backend.Exception.ResourceNotFoundException;
 import com.mobile.backend.model.Category;
 import com.mobile.backend.model.Cloth;
 import com.mobile.backend.payload.CategoryResponse;
@@ -14,6 +15,7 @@ import com.mobile.backend.payload.ClothResponse;
 import com.mobile.backend.repository.CategoryRepository;
 import com.mobile.backend.repository.ClothRepository;
 import com.mobile.backend.service.ICategoryService;
+import com.mobile.backend.untils.AppConstant;
 
 @Service
 public class CategoryServiceImpl implements ICategoryService {
@@ -37,7 +39,8 @@ public class CategoryServiceImpl implements ICategoryService {
 
 	@Override
 	public CategoryResponse getCategoryById(Long categoryId) {
-		Category category = categoryRepository.findById(categoryId).get();
+		Category category = categoryRepository.findById(categoryId)
+				.orElseThrow(() -> new ResourceNotFoundException(AppConstant.CATEGORY_NOT_FOUND+categoryId));
 		CategoryResponse categoryResponse = mapper.map(category, CategoryResponse.class);
 		return categoryResponse;
 	}
@@ -45,7 +48,8 @@ public class CategoryServiceImpl implements ICategoryService {
 	@Override
 	public List<ClothResponse> getClothesByCategoryId(Long categoryId) {
 		
-		Category category = categoryRepository.findById(categoryId).get();
+		Category category = categoryRepository.findById(categoryId)
+				.orElseThrow(() -> new ResourceNotFoundException(AppConstant.CATEGORY_NOT_FOUND+categoryId));
 		
 		List<Cloth> clothes = clothRepository.findByCategory(category);
 		List<ClothResponse> clothResponses =

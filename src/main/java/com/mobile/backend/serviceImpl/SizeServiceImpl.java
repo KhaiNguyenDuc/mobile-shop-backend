@@ -7,10 +7,12 @@ import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.mobile.backend.Exception.ResourceNotFoundException;
 import com.mobile.backend.model.Size;
 import com.mobile.backend.payload.SizeResponse;
 import com.mobile.backend.repository.SizeRepository;
 import com.mobile.backend.service.ISizeService;
+import com.mobile.backend.untils.AppConstant;
 
 @Service
 public class SizeServiceImpl implements ISizeService {
@@ -31,7 +33,8 @@ public class SizeServiceImpl implements ISizeService {
 
 	@Override
 	public SizeResponse getSizeById(Long sizeId) {
-		Size size = sizeRepository.findById(sizeId).get();
+		Size size = sizeRepository.findById(sizeId)
+				.orElseThrow(() -> new ResourceNotFoundException(AppConstant.SIZE_NOT_FOUND+sizeId));;
 		SizeResponse sizeResponse = mapper.map(size, SizeResponse.class);
 		return sizeResponse;
 	}

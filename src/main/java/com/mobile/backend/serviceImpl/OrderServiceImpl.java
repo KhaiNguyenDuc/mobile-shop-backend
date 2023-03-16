@@ -7,10 +7,12 @@ import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.mobile.backend.Exception.ResourceNotFoundException;
 import com.mobile.backend.model.order.Order;
 import com.mobile.backend.payload.OrderResponse;
 import com.mobile.backend.repository.OrderRepository;
 import com.mobile.backend.service.IOrderService;
+import com.mobile.backend.untils.AppConstant;
 
 @Service
 public class OrderServiceImpl implements IOrderService {
@@ -28,7 +30,8 @@ public class OrderServiceImpl implements IOrderService {
 				mapper.typeMap(OrderResponse.class, Order.class)
 					.addMappings(mapper -> mapper.skip(Order::setId));
 				
-		Order order = orderRepository.findById(orderId).get();
+		Order order = orderRepository.findById(orderId)
+				.orElseThrow(() -> new ResourceNotFoundException(AppConstant.ORDER_NOT_FOUND+orderId));
 		OrderResponse orderResponse = mapper.map(order, OrderResponse.class);
 		return orderResponse;
 	}

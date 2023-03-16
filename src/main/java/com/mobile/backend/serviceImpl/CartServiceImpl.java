@@ -7,10 +7,12 @@ import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.mobile.backend.Exception.ResourceNotFoundException;
 import com.mobile.backend.model.cart.Cart;
 import com.mobile.backend.payload.CartResponse;
 import com.mobile.backend.repository.CartRepository;
 import com.mobile.backend.service.ICartService;
+import com.mobile.backend.untils.AppConstant;
 
 @Service
 public class CartServiceImpl implements ICartService {
@@ -28,7 +30,8 @@ public class CartServiceImpl implements ICartService {
 		mapper.typeMap(CartResponse.class, Cart.class)
 			.addMappings(mapper -> mapper.skip(Cart::setId));
 		
-		Cart cart = cartRepository.findById(cartId).get();
+		Cart cart = cartRepository.findById(cartId)
+				.orElseThrow(() -> new ResourceNotFoundException(AppConstant.CART_NOT_FOUND+cartId));
 		CartResponse cartResponse = mapper.map(cart, CartResponse.class);
 		
 		return cartResponse;

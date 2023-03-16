@@ -2,6 +2,8 @@ package com.mobile.backend.model.user;
 
 import java.util.List;
 
+import org.hibernate.annotations.NaturalId;
+
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import jakarta.persistence.Column;
@@ -32,8 +34,9 @@ public class Role {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	
-	@Column(name="name")
 	@Enumerated(EnumType.STRING)
+	@NaturalId
+	@Column(name = "name")
 	private RoleName name;
 	
 	@Column(name="description")

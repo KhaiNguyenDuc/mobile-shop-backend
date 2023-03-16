@@ -14,4 +14,16 @@ public class AppConstant {
 	public static final String DELIVERING="In delivering";
 	public static final String PREPARING="In preparing";
 	public static final String COMPLETED="Completed";
+	
+	public static final String ROLE_NOT_FOUND = "Not found role with name: ";
+	public static final String CATEGORY_NOT_FOUND = "Not found category with id: ";
+	public static final String BRAND_NOT_FOUND = "Not found brand with id: ";
+	public static final String USER_NOT_FOUND = "Not found user with username: ";
+	public static final String USER_ID_NOT_FOUND = "Not found user with username: ";
+	public static final String CART_NOT_FOUND = "Not found cart with id: ";
+	public static final String CART_ITEM_NOT_FOUND = "Not found cart item with id: ";
+	public static final String ORDER_NOT_FOUND = "Not found order with id: ";
+	public static final String ORDER_ITEM_NOT_FOUND = "Not found order item with id: ";
+	public static final String CLOTH_NOT_FOUND = "Not found cloth with id: ";
+	public static final String SIZE_NOT_FOUND = "Not found size with id: ";
 }

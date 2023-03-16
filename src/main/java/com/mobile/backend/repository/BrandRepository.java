@@ -1,5 +1,7 @@
 package com.mobile.backend.repository;
 
+import java.util.Optional;
+
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import com.mobile.backend.model.Brand;
@@ -7,8 +9,8 @@ import com.mobile.backend.model.Cloth;
 
 public interface BrandRepository extends JpaRepository<Brand, Long> {
 
-	Brand findByName(String string);
+	Optional<Brand> findByName(String string);
 
-	Brand findByClothes(Cloth cloth);
+	Optional<Brand> findByClothes(Cloth cloth);
 
 }

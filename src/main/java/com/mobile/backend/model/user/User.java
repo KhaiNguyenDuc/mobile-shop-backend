@@ -1,6 +1,7 @@
 package com.mobile.backend.model.user;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
 
 import com.mobile.backend.model.cart.Cart;
@@ -9,6 +10,7 @@ import com.mobile.backend.model.order.Order;
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
@@ -58,7 +60,10 @@ public class User {
 	@Column(name = "enabled")
 	private Boolean enabled;
 	
-	@ManyToMany
+	@Column(name = "image")
+	private String image;
+	
+	@ManyToMany(fetch = FetchType.EAGER)
 	@JoinTable(
 			name = "user_role",
 			joinColumns = @JoinColumn(name = "user_id"),
@@ -72,6 +77,10 @@ public class User {
 	@OneToMany(mappedBy = "user",cascade = CascadeType.ALL,orphanRemoval = true)
 	private List<Order> orders;
 
+	public Boolean isEnabled() {
+		return this.enabled;
+	}
+	
 
 
 }

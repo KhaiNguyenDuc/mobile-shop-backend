@@ -7,6 +7,7 @@ import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.mobile.backend.Exception.ResourceNotFoundException;
 import com.mobile.backend.model.cart.Cart;
 import com.mobile.backend.model.order.Order;
 import com.mobile.backend.model.user.User;
@@ -15,6 +16,7 @@ import com.mobile.backend.payload.OrderResponse;
 import com.mobile.backend.payload.UserResponse;
 import com.mobile.backend.repository.UserRepository;
 import com.mobile.backend.service.IUserService;
+import com.mobile.backend.untils.AppConstant;
 
 @Service
 public class UserServiceImpl implements IUserService {
@@ -35,7 +37,8 @@ public class UserServiceImpl implements IUserService {
 
 	@Override
 	public UserResponse getUserById(Long userId) {
-		User user = userRepository.findById(userId).get();
+		User user = userRepository.findById(userId)
+				.orElseThrow(() -> new ResourceNotFoundException(AppConstant.USER_ID_NOT_FOUND+userId));
 		UserResponse userResponse = mapper.map(user, UserResponse.class);
 		return userResponse;
 	}
@@ -46,7 +49,8 @@ public class UserServiceImpl implements IUserService {
 				mapper.typeMap(CartResponse.class, Cart.class)
 					.addMappings(mapper -> mapper.skip(Cart::setId));
 				
-		User user = userRepository.findById(userId).get();
+		User user = userRepository.findById(userId)
+				.orElseThrow(() -> new ResourceNotFoundException(AppConstant.USER_ID_NOT_FOUND+userId));;
 		CartResponse cartResponse = mapper.map(user.getCart(), CartResponse.class);
 		return cartResponse;
 	}
@@ -57,7 +61,8 @@ public class UserServiceImpl implements IUserService {
 		mapper.typeMap(OrderResponse.class, Order.class)
 			.addMappings(mapper -> mapper.skip(Order::setId));
 		
-		User user = userRepository.findById(userId).get();
+		User user = userRepository.findById(userId)
+				.orElseThrow(() -> new ResourceNotFoundException(AppConstant.USER_ID_NOT_FOUND+userId));
 		List<OrderResponse> orderResponses = 
 				Arrays.asList(mapper.map(user.getOrders(), OrderResponse[].class));
 		return orderResponses;

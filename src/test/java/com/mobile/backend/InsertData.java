@@ -14,6 +14,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase;
 import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase.Replace;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.test.annotation.Rollback;
 
 import com.mobile.backend.model.Brand;
@@ -48,6 +49,9 @@ import com.mobile.backend.untils.AppConstant;
 @Rollback(false)
 public class InsertData {
 
+	@Autowired
+	PasswordEncoder encoder;
+	
 	@Autowired
 	UserRepository userRepository;
 	
@@ -95,7 +99,7 @@ public class InsertData {
 		// Create role user
 		Role roleUser = new Role();
 		roleUser.setName(RoleName.USER);
-	
+		roleRepository.save(roleUser);
 	}
 	
 	
@@ -181,11 +185,11 @@ public class InsertData {
 	@Test
 	public void addCloth() {
 		
-		Brand brandGucci = brandRepository.findByName("Gucci");
-		Brand brandLevis = brandRepository.findByName("Levis");
-		Brand brandCalvinKlein = brandRepository.findByName("Calvin Klein");
-		Brand brandAristino = brandRepository.findByName("Aristino");
-		Brand brandMoiDien = brandRepository.findByName("Moi Dien");
+		Brand brandGucci = brandRepository.findByName("Gucci").get();
+		Brand brandLevis = brandRepository.findByName("Levis").get();
+		Brand brandCalvinKlein = brandRepository.findByName("Calvin Klein").get();
+		Brand brandAristino = brandRepository.findByName("Aristino").get();
+		Brand brandMoiDien = brandRepository.findByName("Moi Dien").get();
 		
 		Size sizeL = sizeRepository.findByName("L");
 		Size sizeM = sizeRepository.findByName("M");
@@ -193,10 +197,10 @@ public class InsertData {
 		Size sizeXXL = sizeRepository.findByName("XXL");
 		Size sizeXXXL = sizeRepository.findByName("XXXL");
 		
-		Category casualWear = categoryRepository.findByName("Casual Wear");
-		Category sportsWear = categoryRepository.findByName("Sport Wear");
-		Category formalWear = categoryRepository.findByName("Formal Wear");
-		Category beachWear = categoryRepository.findByName("Beach Wear");
+		Category casualWear = categoryRepository.findByName("Casual Wear").get();
+		Category sportsWear = categoryRepository.findByName("Sports Wear").get();
+		Category formalWear = categoryRepository.findByName("Formal Wear").get();
+		Category beachWear = categoryRepository.findByName("Beach Wear").get();
 		
 		
 		Cloth cloth1 = new Cloth();
@@ -346,10 +350,7 @@ public class InsertData {
 		Cloth cloth1 = clothRepository.findById(1L).get();
 		Cloth cloth2 = clothRepository.findById(2L).get();
 		Cloth cloth3 = clothRepository.findById(3L).get();
-		Cloth cloth4 = clothRepository.findById(4L).get();
-		Cloth cloth5 = clothRepository.findById(5L).get();
-		Cloth cloth6 = clothRepository.findById(6L).get();
-		Cloth cloth7 = clothRepository.findById(7L).get();
+
 		// For user Khai
 		Cart cartKhai = cartRepository.findById(1L).get();
 		
@@ -378,7 +379,6 @@ public class InsertData {
 	@Test
 	public void addUsers() {
 		
-		Role roleAdmin = roleRepository.findByName(RoleName.ADMIN);
 		Role roleUser = roleRepository.findByName(RoleName.USER);
 		
 		Cart cartKhai = cartRepository.findById(1L).get();
@@ -386,7 +386,7 @@ public class InsertData {
 		
 		User userKhai = new User();
 		userKhai.setUsername("admin");
-		userKhai.setPassword("123");
+		userKhai.setPassword(encoder.encode("123"));
 		userKhai.setAddress("241, Nguyễn Trãi, Lái Thiêu, Thuận An, Bình Dương");
 		userKhai.setEmail("duckhailinux@gmail.com");
 		userKhai.setBirthday(LocalDate.of(2002,6,12));
@@ -431,7 +431,7 @@ public class InsertData {
 		
 		User userKhai = userRepository.findById(1L).get();
 		
-		OrderTrack trackDelivering = orderTrackRepository.findByStatus(AppConstant.DELIVERING);
+		OrderTrack trackDelivering = orderTrackRepository.findByStatus(AppConstant.DELIVERING).get();
 		
 		com.mobile.backend.model.order.Order orderKhai = new com.mobile.backend.model.order.Order();
 		orderKhai.setOrderDate(new Date());
