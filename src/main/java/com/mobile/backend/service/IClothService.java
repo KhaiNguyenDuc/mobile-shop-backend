@@ -12,8 +12,6 @@ public interface IClothService {
 
 	ClothResponse getClothById(Long clothId);
 
-	List<SizeResponse> getSizesByClothId(Long clothId);
-
 	BrandResponse getBrandByClothId(Long clothId);
 
 }

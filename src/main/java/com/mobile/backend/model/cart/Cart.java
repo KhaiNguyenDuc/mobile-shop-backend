@@ -31,4 +31,8 @@ public class Cart {
 	@JsonIgnore
 	private User user;
 	
+	public void addCartItem(CartItem cartItem) {
+		cartItems.add(cartItem);
+	}
+	
 }

@@ -35,13 +35,6 @@ public class ClothController {
 		return new ResponseEntity<>(cloth,HttpStatus.OK);
 	}
 	
-	@GetMapping("/{cloth_id}/sizes")
-	public ResponseEntity<List<SizeResponse>> getSizesByClothId(
-			@PathVariable("cloth_id") Long clothId){
-		List<SizeResponse> sizes = clothService.getSizesByClothId(clothId);
-		return new ResponseEntity<>(sizes,HttpStatus.OK);
-	}
-	
 	@GetMapping("/{cloth_id}/brand")
 	public ResponseEntity<BrandResponse> getBrandByClothId(
 			@PathVariable("cloth_id") Long clothId){

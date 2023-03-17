@@ -9,9 +9,7 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.JoinTable;
-import jakarta.persistence.ManyToMany;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -33,11 +31,8 @@ public class Size {
 	@Column(name="name")
 	private String name;
 	
+	@OneToMany(mappedBy = "size")
 	@JsonIgnore
-	@ManyToMany
-	@JoinTable(
-			name="cloth_size",
-			joinColumns = @JoinColumn(name="size_id"),
-			inverseJoinColumns = @JoinColumn(name="cloth_id"))
-	private List<Cloth> clothes;
+	private List<Inventory> inventory;
+	
 }

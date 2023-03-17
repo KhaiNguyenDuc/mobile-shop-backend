@@ -13,8 +13,6 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
-import jakarta.persistence.JoinTable;
-import jakarta.persistence.ManyToMany;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.OneToOne;
@@ -45,20 +43,13 @@ public class Cloth {
 	@Column(name="description")
 	private String description;
 	
-	@ManyToMany
-	@JoinTable(
-			name="cloth_size",
-			joinColumns = @JoinColumn(name="cloth_id"),
-			inverseJoinColumns = @JoinColumn(name="size_id"))
-	private List<Size> size;
 	
 	@ManyToOne
 	@JoinColumn(name="brand_id", referencedColumnName = "id")
 	private Brand brand;
 	
-	@OneToOne(cascade = CascadeType.ALL)
-	@JoinColumn(name = "inventory_id", referencedColumnName = "id")
-	private Inventory inventory;
+	@OneToMany(mappedBy = "cloth")
+	private List<Inventory> inventory;
 	
 	@ManyToOne
 	@JoinColumn(name="category_id",referencedColumnName = "id")

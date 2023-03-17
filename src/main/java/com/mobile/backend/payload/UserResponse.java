@@ -5,6 +5,7 @@ import java.util.List;
 
 import com.mobile.backend.model.cart.Cart;
 import com.mobile.backend.model.order.Order;
+import com.mobile.backend.model.user.Role;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -27,6 +28,7 @@ public class UserResponse {
 	private String address;
 	private Cart cart;
 	private List<Order> orders;
+	private List<Role> roles;
 	private String image;
 
 

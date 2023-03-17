@@ -191,11 +191,7 @@ public class InsertData {
 		Brand brandAristino = brandRepository.findByName("Aristino").get();
 		Brand brandMoiDien = brandRepository.findByName("Moi Dien").get();
 		
-		Size sizeL = sizeRepository.findByName("L");
-		Size sizeM = sizeRepository.findByName("M");
-		Size sizeXL = sizeRepository.findByName("XL");
-		Size sizeXXL = sizeRepository.findByName("XXL");
-		Size sizeXXXL = sizeRepository.findByName("XXXL");
+		
 		
 		Category casualWear = categoryRepository.findByName("Casual Wear").get();
 		Category sportsWear = categoryRepository.findByName("Sports Wear").get();
@@ -207,9 +203,8 @@ public class InsertData {
 		cloth1.setName("Bermuda Short");
 		cloth1.setPrice(20.5);
 		cloth1.setDescription("Awesome cloth");
-		cloth1.setSize(List.of(sizeL,sizeM,sizeXL,sizeXXL,sizeXXXL));
 		cloth1.setBrand(brandMoiDien);
-		cloth1.setInventory(new Inventory(10));
+		cloth1.setInventory(null);
 		cloth1.setCategory(beachWear);
 		clothRepository.save(cloth1);
 		
@@ -218,9 +213,8 @@ public class InsertData {
 		cloth2.setName("Jeans");
 		cloth2.setPrice(60.0);
 		cloth2.setDescription("Classic denim");
-		cloth2.setSize(List.of(sizeM, sizeL, sizeXL, sizeXXL));
 		cloth2.setBrand(brandLevis);
-		cloth2.setInventory(new Inventory(20));
+		cloth2.setInventory(null);
 		cloth2.setCategory(casualWear);
 		clothRepository.save(cloth2);
 
@@ -229,9 +223,8 @@ public class InsertData {
 		cloth3.setName("Dress Shirt");
 		cloth3.setPrice(45.0);
 		cloth3.setDescription("Sharp and professional");
-		cloth3.setSize(List.of(sizeM, sizeL, sizeXL));
 		cloth3.setBrand(brandCalvinKlein);
-		cloth3.setInventory(new Inventory(15));
+		cloth3.setInventory(null);
 		cloth3.setCategory(formalWear);
 		clothRepository.save(cloth3);
 
@@ -240,9 +233,8 @@ public class InsertData {
 		cloth4.setName("Sweatpants");
 		cloth4.setPrice(35.0);
 		cloth4.setDescription("Comfortable for workouts");
-		cloth4.setSize(List.of(sizeM, sizeL, sizeXL));
 		cloth4.setBrand(brandAristino);
-		cloth4.setInventory(new Inventory(25));
+		cloth4.setInventory(null);
 		cloth4.setCategory(sportsWear);
 		clothRepository.save(cloth4);
 
@@ -251,9 +243,8 @@ public class InsertData {
 		cloth5.setName("Swim Shorts");
 		cloth5.setPrice(25.0);
 		cloth5.setDescription("Fun and colorful");
-		cloth5.setSize(List.of(sizeM, sizeL, sizeXL, sizeXXL));
 		cloth5.setBrand(brandMoiDien);
-		cloth5.setInventory(new Inventory(12));
+		cloth5.setInventory(null);
 		cloth5.setCategory(beachWear);
 		clothRepository.save(cloth5);
 
@@ -262,9 +253,8 @@ public class InsertData {
 		cloth6.setName("Hoodie");
 		cloth6.setPrice(50.0);
 		cloth6.setDescription("Warm and cozy");
-		cloth6.setSize(List.of(sizeM, sizeL, sizeXL, sizeXXL));
 		cloth6.setBrand(brandLevis);
-		cloth6.setInventory(new Inventory(18));
+		cloth6.setInventory(null);
 		cloth6.setCategory(casualWear);
 		clothRepository.save(cloth6);
 
@@ -273,9 +263,8 @@ public class InsertData {
 		cloth7.setName("Running Shorts");
 		cloth7.setPrice(20.0);
 		cloth7.setDescription("Lightweight and breathable");
-		cloth7.setSize(List.of(sizeM, sizeL, sizeXL));
 		cloth7.setBrand(brandAristino);
-		cloth7.setInventory(new Inventory(30));
+		cloth7.setInventory(null);
 		cloth7.setCategory(sportsWear);
 		clothRepository.save(cloth7);
 
@@ -284,9 +273,8 @@ public class InsertData {
 		cloth8.setName("Suit Jacket");
 		cloth8.setPrice(120.0);
 		cloth8.setDescription("Sharp and stylish");
-		cloth8.setSize(List.of(sizeM, sizeL, sizeXL));
 		cloth8.setBrand(brandCalvinKlein);
-		cloth8.setInventory(new Inventory(8));
+		cloth8.setInventory(null);
 		cloth8.setCategory(formalWear);
 		clothRepository.save(cloth8);
 
@@ -295,9 +283,8 @@ public class InsertData {
 		cloth9.setName("Sun Hat");
 		cloth9.setPrice(15.0);
 		cloth9.setDescription("Great for sun protection");
-		cloth9.setSize(List.of(sizeM, sizeL));
 		cloth9.setBrand(brandMoiDien);
-		cloth9.setInventory(new Inventory(25));
+		cloth9.setInventory(null);
 		cloth9.setCategory(beachWear);
 		clothRepository.save(cloth9);
 
@@ -306,9 +293,8 @@ public class InsertData {
 		cloth10.setName("T-Shirt");
 		cloth10.setPrice(18.0);
 		cloth10.setDescription("Simple and comfortable");
-		cloth10.setSize(List.of(sizeM, sizeL, sizeXL, sizeXXL));
 		cloth10.setBrand(brandLevis);
-		cloth10.setInventory(new Inventory(22));
+		cloth10.setInventory(null);
 		cloth10.setCategory(casualWear);
 		clothRepository.save(cloth10);
 		
@@ -316,9 +302,8 @@ public class InsertData {
 		cloth11.setName("Gucci T-Shirt");
 		cloth11.setPrice(300.0);
 		cloth11.setDescription("Comfortable and stylish t-shirt made by Gucci");
-		cloth11.setSize(List.of(sizeM, sizeL, sizeXL));
 		cloth11.setBrand(brandGucci);
-		cloth11.setInventory(new Inventory(20));
+		cloth11.setInventory(null);
 		cloth11.setCategory(casualWear);
 		clothRepository.save(cloth11);
 
@@ -326,23 +311,91 @@ public class InsertData {
 		cloth12.setName("Gucci Leather Jacket");
 		cloth12.setPrice(1500.0);
 		cloth12.setDescription("Luxurious leather jacket made by Gucci");
-		cloth12.setSize(List.of(sizeL, sizeXL, sizeXXL));
 		cloth12.setBrand(brandGucci);
-		cloth12.setInventory(new Inventory(5));
+		cloth12.setInventory(null);
 		cloth12.setCategory(formalWear);
 		clothRepository.save(cloth12);
 	}
 	
 	@Order(6)
 	@Test
+	public void addInventory() {
+		Size sizeL = sizeRepository.findByName("L");
+		Size sizeM = sizeRepository.findByName("M");
+		Size sizeXL = sizeRepository.findByName("XL");
+		Size sizeXXL = sizeRepository.findByName("XXL");
+		Size sizeXXXL = sizeRepository.findByName("XXXL");
+		
+		// Get cloths
+		Cloth cloth1 = clothRepository.findById(1L).get();
+		Cloth cloth2 = clothRepository.findById(2L).get();
+		Cloth cloth3 = clothRepository.findById(3L).get();
+		Cloth cloth4 = clothRepository.findById(4L).get();
+		Cloth cloth5 = clothRepository.findById(5L).get();
+		Cloth cloth6 = clothRepository.findById(6L).get();
+		Cloth cloth7 = clothRepository.findById(7L).get();
+		Cloth cloth8 = clothRepository.findById(8L).get();
+				
+		// Create inventory 
+		Inventory inventory1 = new Inventory();
+		inventory1.setQuantity(10);
+		inventory1.setCloth(cloth1);
+		inventory1.setSize(sizeL);
+		inventoryRepository.save(inventory1);
+		
+		// Create inventory items
+		Inventory inventory2 = new Inventory();
+		inventory2.setQuantity(5);
+		inventory2.setCloth(cloth2);
+		inventory2.setSize(sizeM);
+		inventoryRepository.save(inventory2);
+
+		Inventory inventory3 = new Inventory();
+		inventory3.setQuantity(15);
+		inventory3.setCloth(cloth3);
+		inventory3.setSize(sizeXL);
+		inventoryRepository.save(inventory3);
+
+		Inventory inventory4 = new Inventory();
+		inventory4.setQuantity(20);
+		inventory4.setCloth(cloth4);
+		inventory4.setSize(sizeL);
+		inventoryRepository.save(inventory4);
+
+		Inventory inventory5 = new Inventory();
+		inventory5.setQuantity(8);
+		inventory5.setCloth(cloth5);
+		inventory5.setSize(sizeXXL);
+		inventoryRepository.save(inventory5);
+
+		Inventory inventory6 = new Inventory();
+		inventory6.setQuantity(3);
+		inventory6.setCloth(cloth6);
+		inventory6.setSize(sizeXXXL);
+		inventoryRepository.save(inventory6);
+		
+		Inventory inventory7 = new Inventory();
+		inventory7.setQuantity(3);
+		inventory7.setCloth(cloth1);
+		inventory7.setSize(sizeXXXL);
+		inventoryRepository.save(inventory7);
+
+	}
+	
+	@Order(7)
+	@Test
 	public void addCart() {
 
 		Cart cartKhai = new Cart();
 		cartKhai.setUser(null);
 		cartRepository.save(cartKhai);
+		
+		Cart cartKiet = new Cart();
+		cartKiet.setUser(null);
+		cartRepository.save(cartKiet);
 	}
 	
-	@Order(7)
+	@Order(8)
 	@Test
 	public void addCartItem() {
 		
@@ -351,11 +404,20 @@ public class InsertData {
 		Cloth cloth2 = clothRepository.findById(2L).get();
 		Cloth cloth3 = clothRepository.findById(3L).get();
 
+		
 		// For user Khai
 		Cart cartKhai = cartRepository.findById(1L).get();
 		
+		Size sizeL = sizeRepository.findByName("L");
+		Size sizeM = sizeRepository.findByName("M");
+		Size sizeXL = sizeRepository.findByName("XL");
+		Size sizeXXL = sizeRepository.findByName("XXL");
+		Size sizeXXXL = sizeRepository.findByName("XXXL");
+		
+		
 		CartItem cartItem1 = new CartItem();
 		cartItem1.setCloth(cloth1);
+		cartItem1.setChoice_size(sizeXXXL);
 		cartItem1.setCart(cartKhai);
 		cartItem1.setQuantity(1);
 		cartItemRepository.save(cartItem1);
@@ -363,29 +425,34 @@ public class InsertData {
 		CartItem cartItem2 = new CartItem();
 		cartItem2.setCloth(cloth2);
 		cartItem2.setCart(cartKhai);
+		cartItem1.setChoice_size(sizeXL);
 		cartItem2.setQuantity(2);
 		cartItemRepository.save(cartItem2);
 		
 		CartItem cartItem3 = new CartItem();
 		cartItem3.setCloth(cloth3);
 		cartItem3.setCart(cartKhai);
+		cartItem1.setChoice_size(sizeL);
 		cartItem3.setQuantity(3);
 		cartItemRepository.save(cartItem3);
-	}
-	
+		
 
-	
-	@Order(8)
+		
+		
+	}
+
+	@Order(9)
 	@Test
 	public void addUsers() {
 		
 		Role roleUser = roleRepository.findByName(RoleName.USER);
+		Role roleAdmin = roleRepository.findByName(RoleName.ADMIN);
 		
 		Cart cartKhai = cartRepository.findById(1L).get();
-		
-		
+		Cart cartKiet = cartRepository.findById(2L).get();
+		// normal user
 		User userKhai = new User();
-		userKhai.setUsername("admin");
+		userKhai.setUsername("khai");
 		userKhai.setPassword(encoder.encode("123"));
 		userKhai.setAddress("241, Nguyễn Trãi, Lái Thiêu, Thuận An, Bình Dương");
 		userKhai.setEmail("duckhailinux@gmail.com");
@@ -398,9 +465,25 @@ public class InsertData {
 		userKhai.setCart(cartKhai);
 		userRepository.save(userKhai);
 		
+		
+		// user admin
+		User userKiet = new User();
+		userKiet.setUsername("admin");
+		userKiet.setPassword(encoder.encode("1234"));
+		userKiet.setAddress("Số 1 Võ Văn Ngân");
+		userKiet.setEmail("admin@gmail.com");
+		userKiet.setBirthday(LocalDate.of(1978,3,11));
+		userKiet.setFirstName("admin");
+		userKiet.setLastName("nguyen");
+		userKiet.setPhoneNumber("0783521740");
+		userKiet.setEnabled(Boolean.TRUE);
+		userKiet.setCart(cartKiet);
+		userKiet.setRoles(Arrays.asList(roleAdmin,roleUser));
+		userRepository.save(userKiet);
+		
 	}
 	
-	@Order(9)
+	@Order(10)
 	@Test
 	public void addOrderTrack() {
 		
@@ -425,7 +508,7 @@ public class InsertData {
 		orderTrackRepository.save(trackCompleted);
 	}
 	
-	@Order(10)
+	@Order(11)
 	@Test
 	public void addOrder() {
 		
@@ -444,7 +527,7 @@ public class InsertData {
 	}
 	
 	
-	@Order(11)
+	@Order(12)
 	@Test
 	public void addOrderItem() {
 		

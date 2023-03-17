@@ -1,6 +1,6 @@
 package com.mobile.backend.payload;
 
-import java.util.Date;
+import java.time.LocalDate;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -18,6 +18,6 @@ public class UserProfileResponse {
 	private String phoneNumber;
 	private Boolean enabled;
 	private String image;
-	private Date birthday;
+	private LocalDate birthday;
 	private String address;
 }

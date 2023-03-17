@@ -4,7 +4,6 @@ import java.util.List;
 
 import com.mobile.backend.model.Brand;
 import com.mobile.backend.model.Inventory;
-import com.mobile.backend.model.Size;
 
 import lombok.Data;
 
@@ -18,10 +17,8 @@ public class ClothResponse {
 	private Integer price;
 	
 	private String description;
-
-	private List<Size> size;
 	
-	private Inventory inventory;
+	private List<Inventory> inventory;
 	
 	private Brand brand;
 }

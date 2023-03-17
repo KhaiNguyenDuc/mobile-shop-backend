@@ -10,4 +10,6 @@ public interface IOrderService {
 
 	List<OrderResponse> getAllOrders();
 
+	List<OrderResponse> getCurrentOrderByUserId(Long id);
+
 }

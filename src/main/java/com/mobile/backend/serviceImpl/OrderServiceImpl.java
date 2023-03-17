@@ -9,8 +9,10 @@ import org.springframework.stereotype.Service;
 
 import com.mobile.backend.Exception.ResourceNotFoundException;
 import com.mobile.backend.model.order.Order;
+import com.mobile.backend.model.user.User;
 import com.mobile.backend.payload.OrderResponse;
 import com.mobile.backend.repository.OrderRepository;
+import com.mobile.backend.repository.UserRepository;
 import com.mobile.backend.service.IOrderService;
 import com.mobile.backend.untils.AppConstant;
 
@@ -19,6 +21,9 @@ public class OrderServiceImpl implements IOrderService {
 
 	@Autowired
 	OrderRepository orderRepository;
+	
+	@Autowired
+	UserRepository userRepository;
 	
 	@Autowired
 	ModelMapper mapper;
@@ -41,6 +46,17 @@ public class OrderServiceImpl implements IOrderService {
 		List<Order> orders = orderRepository.findAll();
 		List<OrderResponse> orderResponses = 
 				Arrays.asList(mapper.map(orders, OrderResponse[].class));
+		return orderResponses;
+	}
+
+	@Override
+	public List<OrderResponse> getCurrentOrderByUserId(Long id) {
+		User user = userRepository.findById(id)
+				.orElseThrow(() -> new ResourceNotFoundException(AppConstant.USER_ID_NOT_FOUND+id));
+		
+		List<OrderResponse> orderResponses = 
+				Arrays.asList(mapper.map(user.getOrders(), OrderResponse[].class));
+		
 		return orderResponses;
 	}
 

@@ -16,6 +16,7 @@ import com.mobile.backend.payload.ClothResponse;
 import com.mobile.backend.payload.SizeResponse;
 import com.mobile.backend.repository.BrandRepository;
 import com.mobile.backend.repository.ClothRepository;
+import com.mobile.backend.repository.InventoryRepository;
 import com.mobile.backend.repository.SizeRepository;
 import com.mobile.backend.service.IClothService;
 import com.mobile.backend.untils.AppConstant;
@@ -31,6 +32,9 @@ public class ClothServiceImpl implements IClothService {
 	
 	@Autowired
 	BrandRepository brandRepository;
+	
+	@Autowired
+	InventoryRepository inventoryRepository;
 	
 	@Autowired
 	ModelMapper mapper;
@@ -51,17 +55,7 @@ public class ClothServiceImpl implements IClothService {
 		return clothResponse;
 	}
 
-	@Override
-	public List<SizeResponse> getSizesByClothId(Long clothId) {
-		
-		Cloth cloth = clothRepository.findById(clothId)
-				.orElseThrow(() -> new ResourceNotFoundException(AppConstant.CLOTH_NOT_FOUND+clothId));
-		
-		List<Size> sizes = sizeRepository.findByClothes(cloth);
-		List<SizeResponse> sizeResponses = 
-				Arrays.asList(mapper.map(sizes, SizeResponse[].class));
-		return sizeResponses;
-	}
+	
 
 	@Override
 	public BrandResponse getBrandByClothId(Long clothId) {

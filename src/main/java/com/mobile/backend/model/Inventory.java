@@ -7,7 +7,8 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-import jakarta.persistence.OneToOne;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -26,9 +27,14 @@ public class Inventory {
 	@Column(name = "quantity")
 	private Integer quantity;
 	
-	@OneToOne(mappedBy = "inventory")
+	@ManyToOne
+	@JoinColumn(name = "cloth_id", referencedColumnName = "id")
 	@JsonIgnore
 	private Cloth cloth;
+	
+	@ManyToOne
+	@JoinColumn(name="size_id",referencedColumnName = "id")
+	private Size size;
 
 	public Inventory(Integer quantity) {
 		super();

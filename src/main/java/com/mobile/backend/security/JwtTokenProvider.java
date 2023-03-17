@@ -11,6 +11,7 @@ import org.springframework.util.StringUtils;
 
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
+import io.jsonwebtoken.SignatureAlgorithm;
 import io.jsonwebtoken.security.Keys;
 import jakarta.servlet.http.HttpServletRequest;
 
@@ -34,8 +35,8 @@ public class JwtTokenProvider {
 		
 		String jws = Jwts.builder()
 				.setSubject(userPrincipal.getId().toString())
-				.signWith(key)
 				.setExpiration(new Date(now.getTime() + expiration))
+				.signWith(key,SignatureAlgorithm.HS512)
 				.compact();
 
 		return jws;

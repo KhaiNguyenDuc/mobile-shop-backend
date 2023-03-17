@@ -11,6 +11,7 @@ import org.springframework.stereotype.Service;
 
 import com.mobile.backend.Exception.ResourceExistException;
 import com.mobile.backend.Exception.ResourceNotFoundException;
+import com.mobile.backend.Exception.UserNotFoundException;
 import com.mobile.backend.model.cart.Cart;
 import com.mobile.backend.model.order.Order;
 import com.mobile.backend.model.user.Role;
@@ -23,6 +24,7 @@ import com.mobile.backend.payload.UserRequest;
 import com.mobile.backend.payload.UserResponse;
 import com.mobile.backend.repository.RoleRepository;
 import com.mobile.backend.repository.UserRepository;
+import com.mobile.backend.security.UserPrincipal;
 import com.mobile.backend.service.IUserService;
 import com.mobile.backend.untils.AppConstant;
 
@@ -103,4 +105,61 @@ public class UserServiceImpl implements IUserService {
 		return mapper.map(user, UserProfileResponse.class);
 	}
 
+	@Override
+	public UserProfileResponse getCurrentUser(UserPrincipal userPrincipal) {
+		String username = userPrincipal.getUsername();
+		User user = userRepository.findByUsername(username)
+				.orElseThrow(() -> new UserNotFoundException(
+						AppConstant.USER_NOT_FOUND + username));
+		
+		
+		UserProfileResponse userProfile = new UserProfileResponse();
+		userProfile.setId(user.getId());
+		userProfile.setUsername(username);
+		userProfile.setFirstName(user.getFirstName());
+		userProfile.setLastName(user.getLastName());
+		userProfile.setEmail(user.getEmail());
+		userProfile.setPhoneNumber(user.getPhoneNumber());
+		userProfile.setImage(user.getImage());
+		userProfile.setAddress(user.getAddress());
+		userProfile.setBirthday(user.getBirthday());
+		userProfile.setEnabled(user.getEnabled());
+		return userProfile;
+	}
+
+	@Override
+	public Boolean checkUsernameUnique(String username) {
+		return !userRepository.existsByUsername(username);
+	}
+
+	@Override
+	public Boolean checkEmailUnique(String email) {
+		return !userRepository.existsByEmail(email);
+	}
+
+	@Override
+	public CartResponse getCartByCurrentUser(UserPrincipal userPrincipal) {
+		String username = userPrincipal.getUsername();
+		User user = userRepository.findByUsername(username)
+				.orElseThrow(() -> new UserNotFoundException(
+						AppConstant.USER_NOT_FOUND + username));
+		
+		CartResponse cartResponse = mapper.map(user.getCart(), CartResponse.class);
+		return cartResponse;
+	}
+
+	@Override
+	public List<OrderResponse> getOrdersByCurrentUser(UserPrincipal userPrincipal) {
+		String username = userPrincipal.getUsername();
+		User user = userRepository.findByUsername(username)
+				.orElseThrow(() -> new UserNotFoundException(
+						AppConstant.USER_NOT_FOUND + username));
+		
+		List<Order> orders = user.getOrders();
+		List<OrderResponse> orderResponses = 
+				Arrays.asList(mapper.map(orders, OrderResponse[].class));
+		return orderResponses;
+	}
+
+	
 }
