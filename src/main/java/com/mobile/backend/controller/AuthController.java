@@ -12,10 +12,10 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.mobile.backend.payload.JwtResponse;
-import com.mobile.backend.payload.LoginRequest;
-import com.mobile.backend.payload.UserProfileResponse;
-import com.mobile.backend.payload.UserRequest;
+import com.mobile.backend.payload.request.LoginRequest;
+import com.mobile.backend.payload.request.UserRequest;
+import com.mobile.backend.payload.response.JwtResponse;
+import com.mobile.backend.payload.response.UserProfileResponse;
 import com.mobile.backend.security.JwtTokenProvider;
 import com.mobile.backend.service.IUserService;
 

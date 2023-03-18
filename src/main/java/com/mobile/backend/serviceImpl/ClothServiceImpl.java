@@ -9,12 +9,16 @@ import org.springframework.stereotype.Service;
 
 import com.mobile.backend.Exception.ResourceNotFoundException;
 import com.mobile.backend.model.Brand;
+import com.mobile.backend.model.Category;
 import com.mobile.backend.model.Cloth;
+import com.mobile.backend.model.Inventory;
 import com.mobile.backend.model.Size;
-import com.mobile.backend.payload.BrandResponse;
-import com.mobile.backend.payload.ClothResponse;
-import com.mobile.backend.payload.SizeResponse;
+import com.mobile.backend.payload.request.ClothRequest;
+import com.mobile.backend.payload.request.InventoryRequest;
+import com.mobile.backend.payload.response.BrandResponse;
+import com.mobile.backend.payload.response.ClothResponse;
 import com.mobile.backend.repository.BrandRepository;
+import com.mobile.backend.repository.CategoryRepository;
 import com.mobile.backend.repository.ClothRepository;
 import com.mobile.backend.repository.InventoryRepository;
 import com.mobile.backend.repository.SizeRepository;
@@ -35,6 +39,9 @@ public class ClothServiceImpl implements IClothService {
 	
 	@Autowired
 	InventoryRepository inventoryRepository;
+	
+	@Autowired
+	CategoryRepository categoryRepository;
 	
 	@Autowired
 	ModelMapper mapper;
@@ -66,6 +73,42 @@ public class ClothServiceImpl implements IClothService {
 				.orElseThrow(() -> new ResourceNotFoundException(AppConstant.BRAND_NOT_FOUND+ clothId));
 		BrandResponse brandResponse = mapper.map(brand, BrandResponse.class);
 		return brandResponse;
+	}
+
+	@Override
+	public ClothResponse addCloth(ClothRequest clothRequest) {
+		
+		Brand brand = brandRepository.findById(clothRequest.getBrandId())
+				.orElseThrow(() -> new ResourceNotFoundException(AppConstant.BRAND_NOT_FOUND+clothRequest.getBrandId()));
+		Category category = categoryRepository.findById(clothRequest.getCategoryId())
+				.orElseThrow(() -> new ResourceNotFoundException(AppConstant.CATEGORY_NOT_FOUND+clothRequest.getCategoryId()));
+		
+		Cloth cloth = new Cloth();
+		cloth.setBrand(brand);
+		cloth.setCategory(category);
+		cloth.setDescription(clothRequest.getDescription());
+		cloth.setName(clothRequest.getName());
+		cloth.setPrice(clothRequest.getPrice());
+		
+		Cloth clothSaved = clothRepository.save(cloth);
+		ClothResponse clothResponse = mapper.map(clothSaved, ClothResponse.class);
+		
+		for (InventoryRequest inventory : clothRequest.getInventory()) {
+			Inventory newInventory = new Inventory();
+			newInventory.setQuantity(inventory.getQuantity());
+			
+			Size size = sizeRepository.findById(inventory.getSizeId())
+					.orElseThrow(() -> new ResourceNotFoundException(AppConstant.SIZE_NOT_FOUND+inventory.getSizeId()));
+			newInventory.setSize(size);
+			newInventory.setCloth(clothSaved);
+			inventoryRepository.save(newInventory);
+			
+			clothResponse.addInventory(newInventory);
+		}
+		
+		
+		
+		return clothResponse;
 	}
 
 }

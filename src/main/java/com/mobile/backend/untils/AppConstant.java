@@ -10,7 +10,6 @@ public class AppConstant {
 	public static final String FAST = "Fast";
 	public static final String VERY_FAST = "Very Fast";
 	
-	public static final String PAYMENT_PROCESS="Payment process";
 	public static final String DELIVERING="In delivering";
 	public static final String PREPARING="In preparing";
 	public static final String COMPLETED="Completed";
@@ -27,6 +26,8 @@ public class AppConstant {
 	public static final String ORDER_ITEM_NOT_FOUND = "Not found order item with id: ";
 	public static final String CLOTH_NOT_FOUND = "Not found cloth with id: ";
 	public static final String SIZE_NOT_FOUND = "Not found size with id: ";
+	public static final String INVENTORY_NOT_FOUND = "Not found inventory";
+	public static final String ORDER_TRACK_NOT_FOUND = "Not found order track with name: ";
 	
 	public static final String CLOTH_EXIST = "This cloth already exist in database";
 	public static final String CART_EXIST = "This cart already exist in database";

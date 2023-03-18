@@ -2,11 +2,12 @@ package com.mobile.backend.service;
 
 import java.util.List;
 
-import com.mobile.backend.payload.CartResponse;
-import com.mobile.backend.payload.OrderResponse;
-import com.mobile.backend.payload.UserProfileResponse;
-import com.mobile.backend.payload.UserRequest;
-import com.mobile.backend.payload.UserResponse;
+import com.mobile.backend.payload.request.UserProfileRequest;
+import com.mobile.backend.payload.request.UserRequest;
+import com.mobile.backend.payload.response.CartResponse;
+import com.mobile.backend.payload.response.OrderResponse;
+import com.mobile.backend.payload.response.UserProfileResponse;
+import com.mobile.backend.payload.response.UserResponse;
 import com.mobile.backend.security.UserPrincipal;
 
 public interface IUserService {
@@ -30,6 +31,8 @@ public interface IUserService {
 	CartResponse getCartByCurrentUser(UserPrincipal userPrincipal);
 
 	List<OrderResponse> getOrdersByCurrentUser(UserPrincipal userPrincipal);
+
+	UserProfileResponse updateCurrentProfile(UserPrincipal userPrincipal, UserProfileRequest userProfileRequest);
 
 
 }

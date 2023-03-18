@@ -1,4 +1,4 @@
-package com.mobile.backend.payload;
+package com.mobile.backend.payload.request;
 
 import java.util.Date;
 
@@ -13,7 +13,6 @@ public class UserRequest {
 	private String firstName;
 	private String lastName;
 	private String phoneNumber;
-	private Boolean enabled;
 	private Date birthday;
 	private String address;
 	private String image;

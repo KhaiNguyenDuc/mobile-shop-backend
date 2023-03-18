@@ -17,11 +17,12 @@ import com.mobile.backend.model.order.Order;
 import com.mobile.backend.model.user.Role;
 import com.mobile.backend.model.user.RoleName;
 import com.mobile.backend.model.user.User;
-import com.mobile.backend.payload.CartResponse;
-import com.mobile.backend.payload.OrderResponse;
-import com.mobile.backend.payload.UserProfileResponse;
-import com.mobile.backend.payload.UserRequest;
-import com.mobile.backend.payload.UserResponse;
+import com.mobile.backend.payload.request.UserProfileRequest;
+import com.mobile.backend.payload.request.UserRequest;
+import com.mobile.backend.payload.response.CartResponse;
+import com.mobile.backend.payload.response.OrderResponse;
+import com.mobile.backend.payload.response.UserProfileResponse;
+import com.mobile.backend.payload.response.UserResponse;
 import com.mobile.backend.repository.RoleRepository;
 import com.mobile.backend.repository.UserRepository;
 import com.mobile.backend.security.UserPrincipal;
@@ -123,7 +124,6 @@ public class UserServiceImpl implements IUserService {
 		userProfile.setImage(user.getImage());
 		userProfile.setAddress(user.getAddress());
 		userProfile.setBirthday(user.getBirthday());
-		userProfile.setEnabled(user.getEnabled());
 		return userProfile;
 	}
 
@@ -159,6 +159,27 @@ public class UserServiceImpl implements IUserService {
 		List<OrderResponse> orderResponses = 
 				Arrays.asList(mapper.map(orders, OrderResponse[].class));
 		return orderResponses;
+	}
+
+	@Override
+	public UserProfileResponse updateCurrentProfile(UserPrincipal userPrincipal,
+			UserProfileRequest userProfileRequest) {
+		User user = userRepository.findById(userPrincipal.getId())
+				.orElseThrow(() -> new ResourceNotFoundException(AppConstant.USER_ID_NOT_FOUND+userPrincipal.getId()));
+		
+		User savedUser = updateProfile(user, userProfileRequest);
+		UserProfileResponse userResponse = mapper.map(savedUser, UserProfileResponse.class );
+		return userResponse;
+	}
+	
+	public User updateProfile(User user, UserProfileRequest userProfileRequest) {
+		
+		user.setFirstName(userProfileRequest.getFirstName());
+		user.setLastName(userProfileRequest.getLastName());
+		user.setAddress(userProfileRequest.getAddress());
+		user.setBirthday(userProfileRequest.getBirthday());
+		user.setPhoneNumber(userProfileRequest.getPhoneNumber());
+		return userRepository.save(user) ;
 	}
 
 	

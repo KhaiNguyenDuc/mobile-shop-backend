@@ -2,8 +2,9 @@ package com.mobile.backend.service;
 
 import java.util.List;
 
-import com.mobile.backend.payload.BrandResponse;
-import com.mobile.backend.payload.ClothResponse;
+import com.mobile.backend.payload.request.BrandRequest;
+import com.mobile.backend.payload.response.BrandResponse;
+import com.mobile.backend.payload.response.ClothResponse;
 
 public interface IBrandService {
 
@@ -12,5 +13,7 @@ public interface IBrandService {
 	BrandResponse getBrandById(Long brandId);
 
 	List<ClothResponse> getClothesByBrandId(Long brandId);
+
+	BrandResponse addBrand(BrandRequest brandRequest);
 
 }

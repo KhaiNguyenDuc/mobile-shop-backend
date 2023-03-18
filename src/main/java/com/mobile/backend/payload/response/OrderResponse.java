@@ -1,4 +1,4 @@
-package com.mobile.backend.payload;
+package com.mobile.backend.payload.response;
 
 import java.util.Date;
 import java.util.List;
@@ -24,4 +24,8 @@ public class OrderResponse {
 	private OrderTrack orderTrack;
 
 	private Long userId;
+	
+	private Double totalPrice;
+	
+	private Double totalProductPrice;
 }

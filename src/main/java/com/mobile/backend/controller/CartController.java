@@ -15,9 +15,9 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.mobile.backend.payload.ApiResponse;
-import com.mobile.backend.payload.CartItemRequest;
-import com.mobile.backend.payload.CartResponse;
+import com.mobile.backend.payload.request.CartItemRequest;
+import com.mobile.backend.payload.response.ApiResponse;
+import com.mobile.backend.payload.response.CartResponse;
 import com.mobile.backend.security.CurrentUser;
 import com.mobile.backend.security.UserPrincipal;
 import com.mobile.backend.service.ICartService;

@@ -2,9 +2,9 @@ package com.mobile.backend.service;
 
 import java.util.List;
 
-import com.mobile.backend.payload.BrandResponse;
-import com.mobile.backend.payload.ClothResponse;
-import com.mobile.backend.payload.SizeResponse;
+import com.mobile.backend.payload.request.ClothRequest;
+import com.mobile.backend.payload.response.BrandResponse;
+import com.mobile.backend.payload.response.ClothResponse;
 
 public interface IClothService {
 
@@ -13,5 +13,7 @@ public interface IClothService {
 	ClothResponse getClothById(Long clothId);
 
 	BrandResponse getBrandByClothId(Long clothId);
+
+	ClothResponse addCloth(ClothRequest clothRequest);
 
 }

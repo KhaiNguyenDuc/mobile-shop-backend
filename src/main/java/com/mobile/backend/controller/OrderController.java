@@ -8,10 +8,13 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.mobile.backend.payload.OrderResponse;
+import com.mobile.backend.payload.request.OrderRequest;
+import com.mobile.backend.payload.response.OrderResponse;
 import com.mobile.backend.security.CurrentUser;
 import com.mobile.backend.security.UserPrincipal;
 import com.mobile.backend.service.IOrderService;
@@ -43,5 +46,14 @@ public class OrderController {
 	public ResponseEntity<List<OrderResponse>> getCurrentOrderByUserId(@CurrentUser UserPrincipal userPrincipal){
 		List<OrderResponse> orders = orderService.getCurrentOrderByUserId(userPrincipal.getId());
 		return new ResponseEntity<>(orders,HttpStatus.OK);
+	}
+	
+	@PostMapping("/current/submit")
+	@PreAuthorize("hasRole('USER')")
+	public ResponseEntity<OrderResponse> submitOrder(
+			@CurrentUser UserPrincipal userPrincipal,
+			@RequestBody OrderRequest orderRequest){
+		OrderResponse order = orderService.submitOrder(userPrincipal.getId(),orderRequest);
+		return new ResponseEntity<>(order,HttpStatus.OK);
 	}
 }

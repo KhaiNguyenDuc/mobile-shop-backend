@@ -425,14 +425,14 @@ public class InsertData {
 		CartItem cartItem2 = new CartItem();
 		cartItem2.setCloth(cloth2);
 		cartItem2.setCart(cartKhai);
-		cartItem1.setChoice_size(sizeXL);
+		cartItem2.setChoice_size(sizeM);
 		cartItem2.setQuantity(2);
 		cartItemRepository.save(cartItem2);
 		
 		CartItem cartItem3 = new CartItem();
 		cartItem3.setCloth(cloth3);
 		cartItem3.setCart(cartKhai);
-		cartItem1.setChoice_size(sizeL);
+		cartItem3.setChoice_size(sizeXL);
 		cartItem3.setQuantity(3);
 		cartItemRepository.save(cartItem3);
 		
@@ -486,11 +486,6 @@ public class InsertData {
 	@Order(10)
 	@Test
 	public void addOrderTrack() {
-		
-		// Payment process
-		OrderTrack trackPaymentProcess = new OrderTrack();
-		trackPaymentProcess.setStatus(AppConstant.PAYMENT_PROCESS);
-		orderTrackRepository.save(trackPaymentProcess);
 		
 		// Delivery
 		OrderTrack trackDelivering = new OrderTrack();

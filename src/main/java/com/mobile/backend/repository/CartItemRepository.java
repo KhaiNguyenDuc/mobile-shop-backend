@@ -1,5 +1,6 @@
 package com.mobile.backend.repository;
 
+import java.util.List;
 import java.util.Optional;
 
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -11,5 +12,8 @@ public interface CartItemRepository extends JpaRepository<CartItem, Long> {
 
 
 	Optional<CartItem> findByCartAndId(Cart cart, Long id);
+
+
+	List<CartItem> findByIdInAndCart(List<Long> cartItemId, Cart cart);
 
 }

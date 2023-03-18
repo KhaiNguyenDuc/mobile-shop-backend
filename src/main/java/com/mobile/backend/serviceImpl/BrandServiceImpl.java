@@ -10,8 +10,9 @@ import org.springframework.stereotype.Service;
 import com.mobile.backend.Exception.ResourceNotFoundException;
 import com.mobile.backend.model.Brand;
 import com.mobile.backend.model.Cloth;
-import com.mobile.backend.payload.BrandResponse;
-import com.mobile.backend.payload.ClothResponse;
+import com.mobile.backend.payload.request.BrandRequest;
+import com.mobile.backend.payload.response.BrandResponse;
+import com.mobile.backend.payload.response.ClothResponse;
 import com.mobile.backend.repository.BrandRepository;
 import com.mobile.backend.repository.ClothRepository;
 import com.mobile.backend.service.IBrandService;
@@ -54,6 +55,15 @@ public class BrandServiceImpl implements IBrandService{
 		List<ClothResponse> clothResponses = 
 				Arrays.asList(mapper.map(clothes, ClothResponse[].class));
 		return clothResponses;
+	}
+
+	@Override
+	public BrandResponse addBrand(BrandRequest brandRequest) {
+		Brand brand = new Brand();
+		brand.setName(brandRequest.getName());
+		brandRepository.save(brand);
+		BrandResponse brandResponse = mapper.map(brand, BrandResponse.class);
+		return brandResponse;
 	}
 
 }

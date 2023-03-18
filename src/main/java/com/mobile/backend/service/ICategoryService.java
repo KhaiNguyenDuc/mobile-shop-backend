@@ -2,8 +2,9 @@ package com.mobile.backend.service;
 
 import java.util.List;
 
-import com.mobile.backend.payload.CategoryResponse;
-import com.mobile.backend.payload.ClothResponse;
+import com.mobile.backend.payload.request.CategoryRequest;
+import com.mobile.backend.payload.response.CategoryResponse;
+import com.mobile.backend.payload.response.ClothResponse;
 
 public interface ICategoryService {
 
@@ -12,5 +13,7 @@ public interface ICategoryService {
 	CategoryResponse getCategoryById(Long categoryId);
 
 	List<ClothResponse> getClothesByCategoryId(Long categoryId);
+
+	CategoryResponse addCategory(CategoryRequest categoryRequest);
 
 }

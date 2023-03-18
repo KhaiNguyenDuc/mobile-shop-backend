@@ -10,8 +10,9 @@ import org.springframework.stereotype.Service;
 import com.mobile.backend.Exception.ResourceNotFoundException;
 import com.mobile.backend.model.Category;
 import com.mobile.backend.model.Cloth;
-import com.mobile.backend.payload.CategoryResponse;
-import com.mobile.backend.payload.ClothResponse;
+import com.mobile.backend.payload.request.CategoryRequest;
+import com.mobile.backend.payload.response.CategoryResponse;
+import com.mobile.backend.payload.response.ClothResponse;
 import com.mobile.backend.repository.CategoryRepository;
 import com.mobile.backend.repository.ClothRepository;
 import com.mobile.backend.service.ICategoryService;
@@ -55,6 +56,17 @@ public class CategoryServiceImpl implements ICategoryService {
 		List<ClothResponse> clothResponses =
 				Arrays.asList(mapper.map(clothes, ClothResponse[].class));
 		return clothResponses;
+	}
+
+	@Override
+	public CategoryResponse addCategory(CategoryRequest categoryRequest) {
+		
+		Category category = new Category();
+		category.setName(categoryRequest.getName());
+		categoryRepository.save(category);
+		
+		CategoryResponse categoryResponse = mapper.map(category, CategoryResponse.class);
+		return categoryResponse;
 	}
 
 }

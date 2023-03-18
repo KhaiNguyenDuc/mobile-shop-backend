@@ -1,5 +1,6 @@
 package com.mobile.backend.model.order;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -51,6 +52,14 @@ public class Order {
 	@JoinColumn(name = "user_id", referencedColumnName = "id")
 	@JsonIgnore
 	private User user;
+	
+	public void addOrderItems(OrderItem orderItem) {
+		
+		if(this.orderItems == null) {
+			orderItems = new ArrayList<>();
+		}
+		orderItems.add(orderItem);
+	}
 	
 	public Double getTotalProductPrice() {
 		Double total = 0.0;

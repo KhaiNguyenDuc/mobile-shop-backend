@@ -1,4 +1,4 @@
-package com.mobile.backend.payload;
+package com.mobile.backend.payload.request;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;

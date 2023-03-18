@@ -9,7 +9,7 @@ import org.springframework.stereotype.Service;
 
 import com.mobile.backend.Exception.ResourceNotFoundException;
 import com.mobile.backend.model.Size;
-import com.mobile.backend.payload.SizeResponse;
+import com.mobile.backend.payload.response.SizeResponse;
 import com.mobile.backend.repository.SizeRepository;
 import com.mobile.backend.service.ISizeService;
 import com.mobile.backend.untils.AppConstant;

@@ -2,9 +2,9 @@ package com.mobile.backend.service;
 
 import java.util.List;
 
-import com.mobile.backend.payload.CartResponse;
-import com.mobile.backend.payload.ApiResponse;
-import com.mobile.backend.payload.CartItemRequest;
+import com.mobile.backend.payload.request.CartItemRequest;
+import com.mobile.backend.payload.response.ApiResponse;
+import com.mobile.backend.payload.response.CartResponse;
 
 public interface ICartService {
 

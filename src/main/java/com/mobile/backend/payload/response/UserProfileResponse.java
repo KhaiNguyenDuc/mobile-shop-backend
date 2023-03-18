@@ -1,4 +1,4 @@
-package com.mobile.backend.payload;
+package com.mobile.backend.payload.response;
 
 import java.time.LocalDate;
 
@@ -16,7 +16,6 @@ public class UserProfileResponse {
 	private String firstName;
 	private String lastName;
 	private String phoneNumber;
-	private Boolean enabled;
 	private String image;
 	private LocalDate birthday;
 	private String address;
