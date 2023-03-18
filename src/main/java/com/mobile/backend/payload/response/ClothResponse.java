@@ -5,6 +5,7 @@ import java.util.List;
 
 import com.mobile.backend.model.Brand;
 import com.mobile.backend.model.Category;
+import com.mobile.backend.model.Image;
 import com.mobile.backend.model.Inventory;
 
 import lombok.Data;
@@ -32,4 +33,6 @@ public class ClothResponse {
 		}
 		inventories.add(inventory);
 	}
+	
+	private Image image;
 }

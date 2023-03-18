@@ -1,5 +1,6 @@
 package com.mobile.backend.serviceImpl;
 
+import java.io.IOException;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Objects;
@@ -8,10 +9,12 @@ import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.mobile.backend.Exception.ResourceExistException;
 import com.mobile.backend.Exception.ResourceNotFoundException;
 import com.mobile.backend.Exception.UserNotFoundException;
+import com.mobile.backend.model.Image;
 import com.mobile.backend.model.cart.Cart;
 import com.mobile.backend.model.order.Order;
 import com.mobile.backend.model.user.Role;
@@ -23,11 +26,13 @@ import com.mobile.backend.payload.response.CartResponse;
 import com.mobile.backend.payload.response.OrderResponse;
 import com.mobile.backend.payload.response.UserProfileResponse;
 import com.mobile.backend.payload.response.UserResponse;
+import com.mobile.backend.repository.ImageRepository;
 import com.mobile.backend.repository.RoleRepository;
 import com.mobile.backend.repository.UserRepository;
 import com.mobile.backend.security.UserPrincipal;
 import com.mobile.backend.service.IUserService;
 import com.mobile.backend.untils.AppConstant;
+import com.mobile.backend.untils.FileUploadUtils;
 
 @Service
 public class UserServiceImpl implements IUserService {
@@ -40,6 +45,9 @@ public class UserServiceImpl implements IUserService {
 	
 	@Autowired
 	RoleRepository roleRepository;
+	
+	@Autowired
+	ImageRepository imageRepository;
 	
 	@Autowired
 	PasswordEncoder encoder;
@@ -180,6 +188,50 @@ public class UserServiceImpl implements IUserService {
 		user.setBirthday(userProfileRequest.getBirthday());
 		user.setPhoneNumber(userProfileRequest.getPhoneNumber());
 		return userRepository.save(user) ;
+	}
+
+	@Override
+	public UserProfileResponse uploadImage(MultipartFile file, UserPrincipal userPrincipal) throws IOException {
+		Long userID = userPrincipal.getId();
+		
+		User user = userRepository.findById(userID)
+				.orElseThrow(() -> new ResourceNotFoundException(AppConstant.USER_ID_NOT_FOUND+userID));
+		
+		Image image;
+		if(user.getImage()!=null) {
+			image = user.getImage();
+			if (!file.isEmpty()) {
+				FileUploadUtils.saveUserImage(file, userID);
+				image.setTitle(userPrincipal.getId() + ".png");
+				image.setPath(AppConstant.UPLOAD_USER_DIRECTORY+"/"+userID+".png");
+				imageRepository.save(image);
+				user.setImage(image);
+				userRepository.save(user);
+			}
+		}else {
+			image = new Image();
+			if (!file.isEmpty()) {
+				FileUploadUtils.saveUserImage(file, userID);
+				image.setTitle(userPrincipal.getId() + ".png");
+				image.setPath(AppConstant.UPLOAD_USER_DIRECTORY+"/"+userID+".png");
+				imageRepository.save(image);
+				user.setImage(image);
+				userRepository.save(user);
+			}
+		}
+		
+		
+		
+		UserProfileResponse userResponse = mapper.map(user, UserProfileResponse.class );
+		return userResponse;
+	}
+
+	@Override
+	public Image getImagesById(UserPrincipal userPrincipal) {
+		User user = userRepository.findById(userPrincipal.getId())
+				.orElseThrow(() -> new ResourceNotFoundException(AppConstant.USER_ID_NOT_FOUND+userPrincipal.getId()));
+		
+		return user.getImage();
 	}
 
 	

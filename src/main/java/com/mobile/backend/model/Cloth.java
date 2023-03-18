@@ -6,7 +6,6 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.mobile.backend.model.cart.CartItem;
 import com.mobile.backend.model.order.OrderItem;
 
-import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -49,7 +48,7 @@ public class Cloth {
 	private Brand brand;
 	
 	@OneToMany(mappedBy = "cloth")
-	private List<Inventory> inventory;
+	private List<Inventory> inventories;
 	
 	@ManyToOne
 	@JoinColumn(name="category_id",referencedColumnName = "id")
@@ -62,5 +61,9 @@ public class Cloth {
 	@OneToMany(mappedBy = "cloth")
 	@JsonIgnore
 	private List<OrderItem> orderItems;
+	
+	@OneToOne
+	@JoinColumn(name="image_id",referencedColumnName = "id")
+	private Image image;
 	
 }

@@ -1,9 +1,9 @@
 package com.mobile.backend.model.user;
 
 import java.time.LocalDate;
-import java.util.ArrayList;
 import java.util.List;
 
+import com.mobile.backend.model.Image;
 import com.mobile.backend.model.cart.Cart;
 import com.mobile.backend.model.order.Order;
 
@@ -60,8 +60,9 @@ public class User {
 	@Column(name = "enabled")
 	private Boolean enabled;
 	
-	@Column(name = "image")
-	private String image;
+	@OneToOne
+	@JoinColumn(name="image_id",referencedColumnName = "id")
+	private Image image;
 	
 	@ManyToMany(fetch = FetchType.EAGER)
 	@JoinTable(

@@ -1,19 +1,26 @@
 package com.mobile.backend.controller;
 
+import java.io.InputStream;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.io.InputStreamResource;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.multipart.MultipartFile;
 
+import com.mobile.backend.Exception.ResourceNotFoundException;
+import com.mobile.backend.model.Image;
 import com.mobile.backend.payload.request.UserProfileRequest;
 import com.mobile.backend.payload.response.CartResponse;
 import com.mobile.backend.payload.response.OrderResponse;
@@ -22,6 +29,9 @@ import com.mobile.backend.payload.response.UserResponse;
 import com.mobile.backend.security.CurrentUser;
 import com.mobile.backend.security.UserPrincipal;
 import com.mobile.backend.service.IUserService;
+import com.mobile.backend.untils.AppConstant;
+
+import io.jsonwebtoken.io.IOException;
 
 @RestController
 @RequestMapping("api/v1/users")
@@ -106,6 +116,31 @@ public class UserController {
 
 		UserProfileResponse user = userService.updateCurrentProfile(userPrincipal,userProfileRequest);
 		return new ResponseEntity<>(user, HttpStatus.OK);
+	}
+	
+	@PostMapping("/current/upload-image")
+	@PreAuthorize("hasRole('USER')")
+	public ResponseEntity<UserProfileResponse> uploadImage(
+			@RequestParam("image") MultipartFile file,
+			@CurrentUser UserPrincipal userPrincipal) throws IOException, java.io.IOException {
+		UserProfileResponse user = userService.uploadImage(file,userPrincipal);
+		return new ResponseEntity<>(user,HttpStatus.OK);
+	}
+	
+	// Get Image
+	@GetMapping(value = "/current/images", produces = MediaType.IMAGE_PNG_VALUE)
+	public ResponseEntity<InputStreamResource> getImages(@CurrentUser UserPrincipal userPrincipal) {
+
+		Image image = userService.getImagesById(userPrincipal);
+
+		try {
+			InputStream in = getClass().getResourceAsStream(image.getPath());
+
+			return ResponseEntity.ok().contentType(MediaType.IMAGE_PNG).body(new InputStreamResource(in));
+		} catch (Exception e) {
+			throw new ResourceNotFoundException(AppConstant.USER_IMAGE_NOT_FOUND);
+		}
+
 	}
 	
 }

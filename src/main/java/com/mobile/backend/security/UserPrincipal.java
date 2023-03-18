@@ -9,6 +9,7 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
+import com.mobile.backend.model.Image;
 import com.mobile.backend.model.user.Role;
 import com.mobile.backend.model.user.User;
 
@@ -28,13 +29,13 @@ public class UserPrincipal implements UserDetails {
 	private String email;
 	private String password;
 	private String phoneNumber;
-	private String image;
+	private Image image;
 	private Boolean enabled;
 
 	private List<GrantedAuthority> authorities;
 
 	public UserPrincipal(Long id, String username, String firstName, String lastName, String email, String password,
-			String phoneNumber, String image, Boolean enabled, List<GrantedAuthority> authorities) {
+			String phoneNumber, Image image, Boolean enabled, List<GrantedAuthority> authorities) {
 		this.id = id;
 		this.username = username;
 		this.firstName = firstName;

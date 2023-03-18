@@ -1,16 +1,19 @@
 package com.mobile.backend.serviceImpl;
 
+import java.io.IOException;
 import java.util.Arrays;
 import java.util.List;
 
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.mobile.backend.Exception.ResourceNotFoundException;
 import com.mobile.backend.model.Brand;
 import com.mobile.backend.model.Category;
 import com.mobile.backend.model.Cloth;
+import com.mobile.backend.model.Image;
 import com.mobile.backend.model.Inventory;
 import com.mobile.backend.model.Size;
 import com.mobile.backend.payload.request.ClothRequest;
@@ -20,10 +23,12 @@ import com.mobile.backend.payload.response.ClothResponse;
 import com.mobile.backend.repository.BrandRepository;
 import com.mobile.backend.repository.CategoryRepository;
 import com.mobile.backend.repository.ClothRepository;
+import com.mobile.backend.repository.ImageRepository;
 import com.mobile.backend.repository.InventoryRepository;
 import com.mobile.backend.repository.SizeRepository;
 import com.mobile.backend.service.IClothService;
 import com.mobile.backend.untils.AppConstant;
+import com.mobile.backend.untils.FileUploadUtils;
 
 @Service
 public class ClothServiceImpl implements IClothService {
@@ -42,6 +47,9 @@ public class ClothServiceImpl implements IClothService {
 	
 	@Autowired
 	CategoryRepository categoryRepository;
+	
+	@Autowired
+	ImageRepository imageRepository;
 	
 	@Autowired
 	ModelMapper mapper;
@@ -109,6 +117,47 @@ public class ClothServiceImpl implements IClothService {
 		
 		
 		return clothResponse;
+	}
+
+	@Override
+	public ClothResponse uploadImage(MultipartFile file, Long clothId) throws IOException {
+		Cloth cloth = clothRepository.findById(clothId)
+				.orElseThrow(() -> new ResourceNotFoundException(AppConstant.CLOTH_NOT_FOUND+clothId));
+		
+		Image image;
+		if(cloth.getImage()!=null) {
+			image = cloth.getImage();
+			if (!file.isEmpty()) {
+				FileUploadUtils.saveClothImage(file, clothId);
+				image.setTitle(clothId.toString() + ".png");
+				image.setPath(AppConstant.UPLOAD_CLOTH_DIRECTORY+"/"+clothId+".png");
+				imageRepository.save(image);
+				cloth.setImage(image);
+				clothRepository.save(cloth);
+			}
+		}else {
+			image = new Image();
+			if (!file.isEmpty()) {
+				FileUploadUtils.saveClothImage(file, clothId);
+				image.setTitle(clothId.toString() + ".png");
+				image.setPath(AppConstant.UPLOAD_CLOTH_DIRECTORY+"/"+clothId+".png");
+				imageRepository.save(image);
+				cloth.setImage(image);
+				clothRepository.save(cloth);
+			}
+		}
+		
+		
+		ClothResponse clothResponse = mapper.map(cloth, ClothResponse.class);
+		return clothResponse;
+	}
+
+	@Override
+	public Image getImagesById(Long clothId) {
+		Cloth cloth = clothRepository.findById(clothId)
+				.orElseThrow(() -> new ResourceNotFoundException(AppConstant.CLOTH_NOT_FOUND+clothId));
+		
+		return cloth.getImage();
 	}
 
 }

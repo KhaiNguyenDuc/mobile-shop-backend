@@ -2,6 +2,15 @@ package com.mobile.backend.untils;
 
 public class AppConstant {
 
+	
+	
+	
+	public static final String UPLOAD_DIRECTORY = "/src/main/java";
+	public static final String UPLOAD_USER_DIRECTORY = "/com/mobile/backend/uploads/users";
+	public static final String UPLOAD_CLOTH_DIRECTORY = "/com/mobile/backend/uploads/clothes";
+	public static final String UPLOAD_CATEGORY_DIRECTORY = "/com/mobile/backend/uploads/categories";
+	public static final String UPLOAD_BANNER_DIRECTORY = "/com/mobile/backend/uploads/banners";
+	
 	public static final Double STANDARD_COST = 1.0;
 	public static final Double FAST_COST = 2.0;
 	public static final Double VERY_FAST_COST = 3.0;
@@ -19,6 +28,10 @@ public class AppConstant {
 	public static final String BRAND_NOT_FOUND = "Not found brand with id: ";
 	public static final String USER_NOT_FOUND = "Not found user with username: ";
 	public static final String USER_ID_NOT_FOUND = "Not found user with username: ";
+	public static final String USER_IMAGE_NOT_FOUND = "Not found image for this user";
+	public static final String BANNER_IMAGE_NOT_FOUND = "Not found image for this banner";
+	public static final String CATEGORY_IMAGE_NOT_FOUND = "Not found image for this category";
+	public static final String CLOTH_IMAGE_NOT_FOUND = "Not found image for this cloth";
 	public static final String CART_NOT_FOUND = "Not found cart with id: ";
 	public static final String CART_ITEM_NOT_FOUND = "Not found cart item with id: ";
 	public static final String CART_ITEM_NOT_FOUND_USER = "Not found cart item for this user with id: ";

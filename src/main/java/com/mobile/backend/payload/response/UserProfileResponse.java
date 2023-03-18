@@ -2,6 +2,8 @@ package com.mobile.backend.payload.response;
 
 import java.time.LocalDate;
 
+import com.mobile.backend.model.Image;
+
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -16,7 +18,7 @@ public class UserProfileResponse {
 	private String firstName;
 	private String lastName;
 	private String phoneNumber;
-	private String image;
+	private Image image;
 	private LocalDate birthday;
 	private String address;
 }

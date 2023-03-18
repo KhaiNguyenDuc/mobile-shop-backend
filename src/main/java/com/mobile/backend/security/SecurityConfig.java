@@ -26,7 +26,8 @@ public class SecurityConfig {
 			"/api/v1/clothes/**",
 			"/api/v1/sizes/**",
 			"/api/v1/users/unique-username",
-			"/api/v1/users/unique-email"
+			"/api/v1/users/unique-email",
+			"/api/v1/banners/**"
 	};
 	
 	@Autowired

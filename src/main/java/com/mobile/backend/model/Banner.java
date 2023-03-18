@@ -1,6 +1,5 @@
 package com.mobile.backend.model;
 
-import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -10,22 +9,16 @@ import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
 import lombok.Data;
 
-@Data
 @Entity
-@Table(name = "categories")
-public class Category {
+@Table(name="banners")
+@Data
+public class Banner {
 
 	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY )
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	
-	@Column(name="name")
-	private String name;
-	
-	@Column(name="description")
-	private String description;
-	
 	@OneToOne
-	@JoinColumn(name="image_id", referencedColumnName = "id")
+	@JoinColumn(name="image_id",referencedColumnName = "id")
 	private Image image;
 }
