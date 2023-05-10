@@ -35,6 +35,7 @@ public class JwtTokenProvider {
 		
 		String jws = Jwts.builder()
 				.setSubject(userPrincipal.getId().toString())
+				.claim("role", userPrincipal.getAuthorities())
 				.setExpiration(new Date(now.getTime() + expiration))
 				.signWith(key,SignatureAlgorithm.HS512)
 				.compact();
