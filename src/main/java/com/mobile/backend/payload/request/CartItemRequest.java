@@ -9,7 +9,6 @@ public class CartItemRequest {
 	
 	private Long choice_sizeId;
 	
-	private Long clothId;
+	private Long mattressId;
 	
-
 }

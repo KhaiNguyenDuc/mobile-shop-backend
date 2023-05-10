@@ -7,7 +7,7 @@ public class AppConstant {
 	
 	public static final String UPLOAD_DIRECTORY = "/src/main/java";
 	public static final String UPLOAD_USER_DIRECTORY = "/com/mobile/backend/uploads/users";
-	public static final String UPLOAD_CLOTH_DIRECTORY = "/com/mobile/backend/uploads/clothes";
+	public static final String UPLOAD_MATTRESS_DIRECTORY = "/com/mobile/backend/uploads/mattresses";
 	public static final String UPLOAD_CATEGORY_DIRECTORY = "/com/mobile/backend/uploads/categories";
 	public static final String UPLOAD_BANNER_DIRECTORY = "/com/mobile/backend/uploads/banners";
 	
@@ -31,18 +31,18 @@ public class AppConstant {
 	public static final String USER_IMAGE_NOT_FOUND = "Not found image for this user";
 	public static final String BANNER_IMAGE_NOT_FOUND = "Not found image for this banner";
 	public static final String CATEGORY_IMAGE_NOT_FOUND = "Not found image for this category";
-	public static final String CLOTH_IMAGE_NOT_FOUND = "Not found image for this cloth";
+	public static final String MATTRESS_IMAGE_NOT_FOUND = "Not found image for this mattress";
 	public static final String CART_NOT_FOUND = "Not found cart with id: ";
 	public static final String CART_ITEM_NOT_FOUND = "Not found cart item with id: ";
 	public static final String CART_ITEM_NOT_FOUND_USER = "Not found cart item for this user with id: ";
 	public static final String ORDER_NOT_FOUND = "Not found order with id: ";
 	public static final String ORDER_ITEM_NOT_FOUND = "Not found order item with id: ";
-	public static final String CLOTH_NOT_FOUND = "Not found cloth with id: ";
+	public static final String MATTRESS_NOT_FOUND = "Not found mattress with id: ";
 	public static final String SIZE_NOT_FOUND = "Not found size with id: ";
 	public static final String INVENTORY_NOT_FOUND = "Not found inventory";
 	public static final String ORDER_TRACK_NOT_FOUND = "Not found order track with name: ";
 	
-	public static final String CLOTH_EXIST = "This cloth already exist in database";
+	public static final String MATTRESS_EXIST = "This mattress already exist in database";
 	public static final String CART_EXIST = "This cart already exist in database";
 	public static final String BRAND_EXIST = "This brand already exist in database";
 	public static final String CATEGORY_EXIST = "This category already exist in database with id: ";

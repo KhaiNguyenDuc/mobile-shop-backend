@@ -23,12 +23,12 @@ public class FileUploadUtils {
 		Files.write(fileNameAndPath, file.getBytes());
 		return fileNameAndPath;
 	}
-	public static Path saveClothImage(MultipartFile file, Long clothId) throws java.io.IOException {
+	public static Path saveMattressImage(MultipartFile file, Long mattressId) throws java.io.IOException {
 		Path fileNameAndPath = Paths.get(
 				System.getProperty("user.dir") +
 				AppConstant.UPLOAD_DIRECTORY+
-				AppConstant.UPLOAD_CLOTH_DIRECTORY, 
-				clothId.toString()+".png");
+				AppConstant.UPLOAD_MATTRESS_DIRECTORY, 
+				mattressId.toString()+".png");
 		Files.write(fileNameAndPath, file.getBytes());
 		return fileNameAndPath;
 		

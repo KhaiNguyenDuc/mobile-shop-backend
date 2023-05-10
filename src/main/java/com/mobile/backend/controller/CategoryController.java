@@ -22,7 +22,7 @@ import com.mobile.backend.Exception.ResourceNotFoundException;
 import com.mobile.backend.model.Image;
 import com.mobile.backend.payload.request.CategoryRequest;
 import com.mobile.backend.payload.response.CategoryResponse;
-import com.mobile.backend.payload.response.ClothResponse;
+import com.mobile.backend.payload.response.MattressResponse;
 import com.mobile.backend.service.ICategoryService;
 import com.mobile.backend.untils.AppConstant;
 
@@ -48,11 +48,11 @@ public class CategoryController {
 		return new ResponseEntity<>(category,HttpStatus.OK);
 	}
 	
-	@GetMapping("/{category_id}/clothes")
-	public ResponseEntity<List<ClothResponse>> getClothesByCategoryId(
+	@GetMapping("/{category_id}/mattresses")
+	public ResponseEntity<List<MattressResponse>> getMattressesByCategoryId(
 			@PathVariable("category_id") Long categoryId){
-		List<ClothResponse> clothes = categoryService.getClothesByCategoryId(categoryId);
-		return new ResponseEntity<>(clothes,HttpStatus.OK);
+		List<MattressResponse> mattresses = categoryService.getMattressesByCategoryId(categoryId);
+		return new ResponseEntity<>(mattresses,HttpStatus.OK);
 	}
 	
 	@PostMapping

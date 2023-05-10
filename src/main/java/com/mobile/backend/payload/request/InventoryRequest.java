@@ -9,5 +9,5 @@ public class InventoryRequest {
 	
 	private Long sizeId;
 	
-	private Long clothId;
+	private Long mattressId;
 }

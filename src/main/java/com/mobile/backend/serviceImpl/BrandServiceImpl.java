@@ -9,12 +9,12 @@ import org.springframework.stereotype.Service;
 
 import com.mobile.backend.Exception.ResourceNotFoundException;
 import com.mobile.backend.model.Brand;
-import com.mobile.backend.model.Cloth;
+import com.mobile.backend.model.Mattress;
 import com.mobile.backend.payload.request.BrandRequest;
 import com.mobile.backend.payload.response.BrandResponse;
-import com.mobile.backend.payload.response.ClothResponse;
+import com.mobile.backend.payload.response.MattressResponse;
 import com.mobile.backend.repository.BrandRepository;
-import com.mobile.backend.repository.ClothRepository;
+import com.mobile.backend.repository.MattressRepository;
 import com.mobile.backend.service.IBrandService;
 import com.mobile.backend.untils.AppConstant;
 
@@ -25,7 +25,7 @@ public class BrandServiceImpl implements IBrandService{
 	BrandRepository brandRepository;
 	
 	@Autowired
-	ClothRepository clothRepository;
+	MattressRepository clothRepository;
 	
 	@Autowired
 	ModelMapper mapper;
@@ -48,12 +48,12 @@ public class BrandServiceImpl implements IBrandService{
 	}
 
 	@Override
-	public List<ClothResponse> getClothesByBrandId(Long brandId) {
+	public List<MattressResponse> getMattressesByBrandId(Long brandId) {
 		Brand brand = brandRepository.findById(brandId)
 				.orElseThrow(() -> new ResourceNotFoundException(AppConstant.BRAND_NOT_FOUND+brandId));
-		List<Cloth> clothes = clothRepository.findByBrand(brand);
-		List<ClothResponse> clothResponses = 
-				Arrays.asList(mapper.map(clothes, ClothResponse[].class));
+		List<Mattress> clothes = clothRepository.findByBrand(brand);
+		List<MattressResponse> clothResponses = 
+				Arrays.asList(mapper.map(clothes, MattressResponse[].class));
 		return clothResponses;
 	}
 

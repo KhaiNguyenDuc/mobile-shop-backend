@@ -131,12 +131,12 @@ public class OrderServiceImpl implements IOrderService {
 		for (CartItem cartItem : cartItems) {
 			OrderItem orderItem = new OrderItem();
 			orderItem.setQuantity(cartItem.getQuantity());
-			orderItem.setCloth(cartItem.getCloth());
+			orderItem.setMattress(cartItem.getMattress());
 			
 			OrderItem savedOItem =  orderItemRepository.save(orderItem);
 			order.addOrderItems(savedOItem);
 			
-			Inventory inventory = inventoryRepository.findByClothAndSize(cartItem.getCloth(),cartItem.getChoice_size())
+			Inventory inventory = inventoryRepository.findByMattressAndSize(cartItem.getMattress(),cartItem.getChoice_size())
 					.orElseThrow(() -> new ResourceNotFoundException(AppConstant.INVENTORY_NOT_FOUND));
 			inventory.setQuantity(inventory.getQuantity()-orderItem.getQuantity());
 			inventoryRepository.save(inventory);

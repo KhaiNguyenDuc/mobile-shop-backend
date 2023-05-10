@@ -4,7 +4,7 @@ import java.util.List;
 
 import com.mobile.backend.payload.request.BrandRequest;
 import com.mobile.backend.payload.response.BrandResponse;
-import com.mobile.backend.payload.response.ClothResponse;
+import com.mobile.backend.payload.response.MattressResponse;
 
 public interface IBrandService {
 
@@ -12,7 +12,7 @@ public interface IBrandService {
 
 	BrandResponse getBrandById(Long brandId);
 
-	List<ClothResponse> getClothesByBrandId(Long brandId);
+	List<MattressResponse> getMattressesByBrandId(Long brandId);
 
 	BrandResponse addBrand(BrandRequest brandRequest);
 

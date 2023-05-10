@@ -5,7 +5,7 @@ import java.util.List;
 import lombok.Data;
 
 @Data
-public class ClothRequest {
+public class MattressRequest {
 
 
 	private String name;

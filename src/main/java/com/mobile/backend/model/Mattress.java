@@ -26,8 +26,8 @@ import lombok.Setter;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-@Table(name = "clothes")
-public class Cloth {
+@Table(name = "mattresses")
+public class Mattress {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY )
@@ -47,18 +47,18 @@ public class Cloth {
 	@JoinColumn(name="brand_id", referencedColumnName = "id")
 	private Brand brand;
 	
-	@OneToMany(mappedBy = "cloth")
+	@OneToMany(mappedBy = "mattress")
 	private List<Inventory> inventories;
 	
 	@ManyToOne
 	@JoinColumn(name="category_id",referencedColumnName = "id")
 	private Category category;
 	
-	@OneToMany(mappedBy = "cloth")
+	@OneToMany(mappedBy = "mattress")
 	@JsonIgnore
 	private List<CartItem> cart;
 	
-	@OneToMany(mappedBy = "cloth")
+	@OneToMany(mappedBy = "mattress")
 	@JsonIgnore
 	private List<OrderItem> orderItems;
 	

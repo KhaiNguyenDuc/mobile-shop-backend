@@ -1,7 +1,7 @@
 package com.mobile.backend.model.cart;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.mobile.backend.model.Cloth;
+import com.mobile.backend.model.Mattress;
 import com.mobile.backend.model.Size;
 
 import jakarta.persistence.Column;
@@ -29,8 +29,8 @@ public class CartItem {
 	private Integer quantity;
 	
 	@ManyToOne
-	@JoinColumn(name = "cloth_id", referencedColumnName = "id")
-	private Cloth cloth;
+	@JoinColumn(name = "mattress_id", referencedColumnName = "id")
+	private Mattress mattress;
 	
 
 	@ManyToOne(fetch = FetchType.LAZY)
@@ -43,6 +43,6 @@ public class CartItem {
 	private Size choice_size;
 	
 	public Double getTotalPrice() {
-		return quantity * cloth.getPrice();
+		return quantity * mattress.getPrice();
 	}
 }

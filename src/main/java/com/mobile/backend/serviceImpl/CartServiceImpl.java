@@ -10,7 +10,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 
 import com.mobile.backend.Exception.ResourceNotFoundException;
-import com.mobile.backend.model.Cloth;
+import com.mobile.backend.model.Mattress;
 import com.mobile.backend.model.Size;
 import com.mobile.backend.model.cart.Cart;
 import com.mobile.backend.model.cart.CartItem;
@@ -20,7 +20,7 @@ import com.mobile.backend.payload.response.ApiResponse;
 import com.mobile.backend.payload.response.CartResponse;
 import com.mobile.backend.repository.CartItemRepository;
 import com.mobile.backend.repository.CartRepository;
-import com.mobile.backend.repository.ClothRepository;
+import com.mobile.backend.repository.MattressRepository;
 import com.mobile.backend.repository.SizeRepository;
 import com.mobile.backend.repository.UserRepository;
 import com.mobile.backend.service.ICartService;
@@ -39,7 +39,7 @@ public class CartServiceImpl implements ICartService {
 	UserRepository userRepository;
 	
 	@Autowired
-	ClothRepository clothRepository;
+	MattressRepository mattressRepository;
 	
 	@Autowired
 	CartItemRepository cartItemRepository;
@@ -90,11 +90,11 @@ public class CartServiceImpl implements ICartService {
 		Cart cart = user.getCart();
 		
 		// get cloth
-		Long clothId = itemRequest.getClothId();
-		Cloth cloth = clothRepository.findById(clothId)
-				.orElseThrow(() -> new ResourceNotFoundException(AppConstant.CLOTH_NOT_FOUND+clothId));
+		Long clothId = itemRequest.getMattressId();
+		Mattress mattress = mattressRepository.findById(clothId)
+				.orElseThrow(() -> new ResourceNotFoundException(AppConstant.MATTRESS_NOT_FOUND+clothId));
 		
-		CartItem cartItemOld = checkClothExist(cart, cloth);
+		CartItem cartItemOld = checkClothExist(cart, mattress);
 		
 		if(Objects.nonNull(cartItemOld)) {
 			
@@ -110,7 +110,7 @@ public class CartServiceImpl implements ICartService {
 			CartItem cartItem = new CartItem();
 			cartItem.setQuantity(itemRequest.getQuantity());
 			cartItem.setChoice_size(size);
-			cartItem.setCloth(cloth);
+			cartItem.setMattress(mattress);
 			cartItem.setCart(cart);
 			cartItemRepository.save(cartItem);
 			
@@ -125,10 +125,10 @@ public class CartServiceImpl implements ICartService {
 		return cartResponse;
 	}
 	
-	public CartItem checkClothExist(Cart cart, Cloth cloth) {
+	public CartItem checkClothExist(Cart cart, Mattress cloth) {
 		
 		for (CartItem cartItem : cart.getCartItems()) {
-			if(cartItem.getCloth().getId().equals(cloth.getId())) {
+			if(cartItem.getMattress().getId().equals(cloth.getId())) {
 				return cartItem;
 			}
 		}

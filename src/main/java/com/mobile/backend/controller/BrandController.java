@@ -15,7 +15,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.mobile.backend.payload.request.BrandRequest;
 import com.mobile.backend.payload.response.BrandResponse;
-import com.mobile.backend.payload.response.ClothResponse;
+import com.mobile.backend.payload.response.MattressResponse;
 import com.mobile.backend.service.IBrandService;
 
 @RestController
@@ -39,9 +39,9 @@ public class BrandController {
 	}
 	
 	@GetMapping("/{brand_id}/clothes")
-	public ResponseEntity<List<ClothResponse>> getClothesByBrandId(
+	public ResponseEntity<List<MattressResponse>> getClothesByBrandId(
 			@PathVariable("brand_id") Long brandId){
-		List<ClothResponse> clothResponses = brandService.getClothesByBrandId(brandId);
+		List<MattressResponse> clothResponses = brandService.getMattressesByBrandId(brandId);
 		return new ResponseEntity<>(clothResponses,HttpStatus.OK);
 	}
 	

@@ -7,7 +7,7 @@ import org.springframework.web.multipart.MultipartFile;
 import com.mobile.backend.model.Image;
 import com.mobile.backend.payload.request.CategoryRequest;
 import com.mobile.backend.payload.response.CategoryResponse;
-import com.mobile.backend.payload.response.ClothResponse;
+import com.mobile.backend.payload.response.MattressResponse;
 
 import io.jsonwebtoken.io.IOException;
 
@@ -17,7 +17,7 @@ public interface ICategoryService {
 
 	CategoryResponse getCategoryById(Long categoryId);
 
-	List<ClothResponse> getClothesByCategoryId(Long categoryId);
+	List<MattressResponse> getMattressesByCategoryId(Long categoryId);
 
 	CategoryResponse addCategory(CategoryRequest categoryRequest);
 

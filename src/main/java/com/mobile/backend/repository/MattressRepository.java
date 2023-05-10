@@ -6,13 +6,13 @@ import org.springframework.data.jpa.repository.JpaRepository;
 
 import com.mobile.backend.model.Brand;
 import com.mobile.backend.model.Category;
-import com.mobile.backend.model.Cloth;
+import com.mobile.backend.model.Mattress;
 
 
-public interface ClothRepository extends JpaRepository<Cloth, Long> {
+public interface MattressRepository extends JpaRepository<Mattress, Long> {
 
-	List<Cloth> findByCategory(Category category);
+	List<Mattress> findByCategory(Category category);
 
-	List<Cloth> findByBrand(Brand brand);
+	List<Mattress> findByBrand(Brand brand);
 
 }

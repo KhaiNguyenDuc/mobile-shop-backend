@@ -1,7 +1,7 @@
 package com.mobile.backend.model.order;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.mobile.backend.model.Cloth;
+import com.mobile.backend.model.Mattress;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -32,11 +32,11 @@ public class OrderItem {
 	private Order order;
 	
 	@ManyToOne
-	@JoinColumn(name = "cloth_id", referencedColumnName = "id")
-	private Cloth cloth;
+	@JoinColumn(name = "mattress_id", referencedColumnName = "id")
+	private Mattress mattress;
 
 	public Double getTotalPrice() {
-		return quantity * cloth.getPrice();
+		return quantity * mattress.getPrice();
 	}
 
 }

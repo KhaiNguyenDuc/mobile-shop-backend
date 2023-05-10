@@ -10,14 +10,14 @@ import org.springframework.web.multipart.MultipartFile;
 
 import com.mobile.backend.Exception.ResourceNotFoundException;
 import com.mobile.backend.model.Category;
-import com.mobile.backend.model.Cloth;
+import com.mobile.backend.model.Mattress;
 import com.mobile.backend.model.Image;
 import com.mobile.backend.payload.request.CategoryRequest;
 import com.mobile.backend.payload.response.CategoryResponse;
-import com.mobile.backend.payload.response.ClothResponse;
+import com.mobile.backend.payload.response.MattressResponse;
 import com.mobile.backend.repository.CategoryRepository;
-import com.mobile.backend.repository.ClothRepository;
 import com.mobile.backend.repository.ImageRepository;
+import com.mobile.backend.repository.MattressRepository;
 import com.mobile.backend.service.ICategoryService;
 import com.mobile.backend.untils.AppConstant;
 import com.mobile.backend.untils.FileUploadUtils;
@@ -31,7 +31,7 @@ public class CategoryServiceImpl implements ICategoryService {
 	CategoryRepository categoryRepository;
 	
 	@Autowired
-	ClothRepository clothRepository;
+	MattressRepository mattressRepository;
 	
 	@Autowired
 	ImageRepository imageRepository;
@@ -56,15 +56,15 @@ public class CategoryServiceImpl implements ICategoryService {
 	}
 
 	@Override
-	public List<ClothResponse> getClothesByCategoryId(Long categoryId) {
+	public List<MattressResponse> getMattressesByCategoryId(Long categoryId) {
 		
 		Category category = categoryRepository.findById(categoryId)
 				.orElseThrow(() -> new ResourceNotFoundException(AppConstant.CATEGORY_NOT_FOUND+categoryId));
 		
-		List<Cloth> clothes = clothRepository.findByCategory(category);
-		List<ClothResponse> clothResponses =
-				Arrays.asList(mapper.map(clothes, ClothResponse[].class));
-		return clothResponses;
+		List<Mattress> mattresses = mattressRepository.findByCategory(category);
+		List<MattressResponse> mattressResponses =
+				Arrays.asList(mapper.map(mattresses, MattressResponse[].class));
+		return mattressResponses;
 	}
 
 	@Override

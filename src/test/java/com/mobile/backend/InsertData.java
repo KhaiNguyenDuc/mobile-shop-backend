@@ -19,9 +19,9 @@ import org.springframework.test.annotation.Rollback;
 import com.mobile.backend.model.Banner;
 import com.mobile.backend.model.Brand;
 import com.mobile.backend.model.Category;
-import com.mobile.backend.model.Cloth;
 import com.mobile.backend.model.Image;
 import com.mobile.backend.model.Inventory;
+import com.mobile.backend.model.Mattress;
 import com.mobile.backend.model.Size;
 import com.mobile.backend.model.cart.Cart;
 import com.mobile.backend.model.cart.CartItem;
@@ -35,9 +35,9 @@ import com.mobile.backend.repository.BrandRepository;
 import com.mobile.backend.repository.CartItemRepository;
 import com.mobile.backend.repository.CartRepository;
 import com.mobile.backend.repository.CategoryRepository;
-import com.mobile.backend.repository.ClothRepository;
 import com.mobile.backend.repository.ImageRepository;
 import com.mobile.backend.repository.InventoryRepository;
+import com.mobile.backend.repository.MattressRepository;
 import com.mobile.backend.repository.OrderItemRepository;
 import com.mobile.backend.repository.OrderRepository;
 import com.mobile.backend.repository.OrderTrackRepository;
@@ -65,7 +65,7 @@ public class InsertData {
 	BrandRepository brandRepository;
 	
 	@Autowired
-	ClothRepository clothRepository;
+	MattressRepository mattressRepository;
 	
 	@Autowired
 	SizeRepository sizeRepository;
@@ -116,54 +116,54 @@ public class InsertData {
 	@Test
 	public void addBrand() {
 		
-		// Create and save a brand object for Gucci
-		Brand brandGucci = new Brand();
-		brandGucci.setName("Gucci");
-		brandRepository.save(brandGucci);
+		// Create and save a brand object for Tempur-Pedic
+		Brand brandTempurPedic = new Brand();
+		brandTempurPedic.setName("Tempur-Pedic");
+		brandRepository.save(brandTempurPedic);
 		
-		// Create and save a brand object for Levi's
-		Brand brandLevis = new Brand();
-		brandLevis.setName("Levis");
-		brandRepository.save(brandLevis);
+		// Create and save a brand object for Serta
+		Brand brandSerta = new Brand();
+		brandSerta.setName("Serta");
+		brandRepository.save(brandSerta);
 
-		// Create and save a brand object for Calvin Klein
-		Brand brandCalvinKlein = new Brand();
-		brandCalvinKlein.setName("Calvin Klein");
-		brandRepository.save(brandCalvinKlein);
+		// Create and save a brand object for Sealy
+		Brand brandSealy = new Brand();
+		brandSealy.setName("Sealy");
+		brandRepository.save(brandSealy);
 
-		// Create and save a brand object for Ralph Lauren
-		Brand brandAristino = new Brand();
-		brandAristino.setName("Aristino");
-		brandRepository.save(brandAristino);
+		// Create and save a brand object for Simmons
+		Brand brandSimmons = new Brand();
+		brandSimmons.setName("Simmons");
+		brandRepository.save(brandSimmons);
 		
-		// Create and save a brand object for Biti's
-		Brand brandMoiDien = new Brand();
-		brandMoiDien.setName("Moi Dien");
-		brandRepository.save(brandMoiDien);
+		// Create and save a brand object for Casper
+		Brand brandCasper = new Brand();
+		brandCasper.setName("Casper");
+		brandRepository.save(brandCasper);
 	}
 	
 	@Order(3)
 	@Test
 	public void addSize() {
-		Size sizeM = new Size();
-		sizeM.setName("M");
-		sizeRepository.save(sizeM);
-		
-		Size sizeL = new Size();
-		sizeL.setName("L");
-		sizeRepository.save(sizeL);
-		
-		Size sizeXL = new Size();
-		sizeXL.setName("XL");
-		sizeRepository.save(sizeXL);
-		
-		Size sizeXXL = new Size();
-		sizeXXL.setName("XXL");
-		sizeRepository.save(sizeXXL);
-		
-		Size sizeXXXL = new Size();
-		sizeXXXL.setName("XXXL");
-		sizeRepository.save(sizeXXXL);
+		Size sizeTwin = new Size();
+		sizeTwin.setName("Twin");
+		sizeRepository.save(sizeTwin);
+
+		Size sizeTwinXL = new Size();
+		sizeTwinXL.setName("Twin XL");
+		sizeRepository.save(sizeTwinXL);
+
+		Size sizeFull = new Size();
+		sizeFull.setName("Full");
+		sizeRepository.save(sizeFull);
+
+		Size sizeQueen = new Size();
+		sizeQueen.setName("Queen");
+		sizeRepository.save(sizeQueen);
+
+		Size sizeKing = new Size();
+		sizeKing.setName("King");
+		sizeRepository.save(sizeKing);
 		
 	}
 	
@@ -171,10 +171,10 @@ public class InsertData {
 	@Test
 	public void addCategory() {
 		
-		Image imageCasualWear = new Image();
-		imageCasualWear.setTitle("1.png");
-		imageCasualWear.setPath(AppConstant.UPLOAD_CATEGORY_DIRECTORY+"/1.png");
-		imageRepository.save(imageCasualWear);
+		Image image1 = new Image();
+		image1.setTitle("1.png");
+		image1.setPath(AppConstant.UPLOAD_CATEGORY_DIRECTORY+"/1.png");
+		imageRepository.save(image1);
 		
 		Image image2 = new Image();
 		image2.setTitle("2.png");
@@ -191,338 +191,337 @@ public class InsertData {
 		image4.setPath(AppConstant.UPLOAD_CATEGORY_DIRECTORY+"/4.png");
 		imageRepository.save(image4);
 		
-		Category casualWear = new Category();
-		casualWear.setName("Casual Wear");
-		casualWear.setImage(imageCasualWear);
-		categoryRepository.save(casualWear);
+		Category memoryFoamMattress = new Category();
+		memoryFoamMattress.setName("Memory Foam Mattress");
+		memoryFoamMattress.setImage(image1);
+		categoryRepository.save(memoryFoamMattress);
 		
-		Category sportsWear = new Category();
-		sportsWear.setName("Sports Wear");
-		sportsWear.setImage(image2);
-		categoryRepository.save(sportsWear);
+		Category hybridMattress = new Category();
+		hybridMattress.setName("Hybrid Mattress");
+		hybridMattress.setImage(image2);
+		categoryRepository.save(hybridMattress);
 		
-		Category formalWear = new Category();
-		formalWear.setName("Formal Wear");
-		formalWear.setImage(image3);
-		categoryRepository.save(formalWear);
+		Category latexMattress = new Category();
+		latexMattress.setName("Latex Mattress");
+		latexMattress.setImage(image3);
+		categoryRepository.save(latexMattress);
 		
-		Category beachWear = new Category();
-		beachWear.setName("Beach Wear");
-		beachWear.setImage(image4);
-		categoryRepository.save(beachWear);
-
+		Category innerspringMattress = new Category();
+		innerspringMattress.setName("Innerspring Mattress");
+		innerspringMattress.setImage(image4);
+		categoryRepository.save(innerspringMattress);
 
 	}
 	
 	@Order(5)
 	@Test
-	public void addCloth() {
-		
-		Brand brandGucci = brandRepository.findByName("Gucci").get();
-		Brand brandLevis = brandRepository.findByName("Levis").get();
-		Brand brandCalvinKlein = brandRepository.findByName("Calvin Klein").get();
-		Brand brandAristino = brandRepository.findByName("Aristino").get();
-		Brand brandMoiDien = brandRepository.findByName("Moi Dien").get();
-		
-		
-		
-		Category casualWear = categoryRepository.findByName("Casual Wear").get();
-		Category sportsWear = categoryRepository.findByName("Sports Wear").get();
-		Category formalWear = categoryRepository.findByName("Formal Wear").get();
-		Category beachWear = categoryRepository.findByName("Beach Wear").get();
-		
+	public void addmattress() {
 		
 		Image image1 = new Image();
 		image1.setTitle("1.png");
-		image1.setPath(AppConstant.UPLOAD_CLOTH_DIRECTORY+"/1.png");
+		image1.setPath(AppConstant.UPLOAD_MATTRESS_DIRECTORY+"/1.png");
 		imageRepository.save(image1);
 		
 		Image image2 = new Image();
 		image2.setTitle("2.png");
-		image2.setPath(AppConstant.UPLOAD_CLOTH_DIRECTORY+"/2.png");
+		image2.setPath(AppConstant.UPLOAD_MATTRESS_DIRECTORY+"/2.png");
 		imageRepository.save(image2);
 
 		Image image3 = new Image();
 		image3.setTitle("3.png");
-		image3.setPath(AppConstant.UPLOAD_CLOTH_DIRECTORY+"/3.png");
+		image3.setPath(AppConstant.UPLOAD_MATTRESS_DIRECTORY+"/3.png");
 		imageRepository.save(image3);
 
 		Image image4 = new Image();
 		image4.setTitle("4.png");
-		image4.setPath(AppConstant.UPLOAD_CLOTH_DIRECTORY+"/4.png");
+		image4.setPath(AppConstant.UPLOAD_MATTRESS_DIRECTORY+"/4.png");
 		imageRepository.save(image4);
 
 		Image image5 = new Image();
 		image5.setTitle("5.png");
-		image5.setPath(AppConstant.UPLOAD_CLOTH_DIRECTORY+"/5.png");
+		image5.setPath(AppConstant.UPLOAD_MATTRESS_DIRECTORY+"/5.png");
 		imageRepository.save(image5);
 
 		Image image6 = new Image();
 		image6.setTitle("6.png");
-		image6.setPath(AppConstant.UPLOAD_CLOTH_DIRECTORY+"/6.png");
+		image6.setPath(AppConstant.UPLOAD_MATTRESS_DIRECTORY+"/6.png");
 		imageRepository.save(image6);
 
 		Image image7 = new Image();
 		image7.setTitle("7.png");
-		image7.setPath(AppConstant.UPLOAD_CLOTH_DIRECTORY+"/7.png");
+		image7.setPath(AppConstant.UPLOAD_MATTRESS_DIRECTORY+"/7.png");
 		imageRepository.save(image7);
 
 		Image image8 = new Image();
 		image8.setTitle("8.png");
-		image8.setPath(AppConstant.UPLOAD_CLOTH_DIRECTORY+"/8.png");
+		image8.setPath(AppConstant.UPLOAD_MATTRESS_DIRECTORY+"/8.png");
 		imageRepository.save(image8);
 
 		Image image9 = new Image();
 		image9.setTitle("9.png");
-		image9.setPath(AppConstant.UPLOAD_CLOTH_DIRECTORY+"/9.png");
+		image9.setPath(AppConstant.UPLOAD_MATTRESS_DIRECTORY+"/9.png");
 		imageRepository.save(image9);
 
 		Image image10 = new Image();
 		image10.setTitle("10.png");
-		image10.setPath(AppConstant.UPLOAD_CLOTH_DIRECTORY+"/10.png");
+		image10.setPath(AppConstant.UPLOAD_MATTRESS_DIRECTORY+"/10.png");
 		imageRepository.save(image10);
 
 		Image image11 = new Image();
 		image11.setTitle("11.png");
-		image11.setPath(AppConstant.UPLOAD_CLOTH_DIRECTORY+"/11.png");
+		image11.setPath(AppConstant.UPLOAD_MATTRESS_DIRECTORY+"/11.png");
 		imageRepository.save(image11);
 
 		Image image12 = new Image();
 		image12.setTitle("12.png");
-		image12.setPath(AppConstant.UPLOAD_CLOTH_DIRECTORY+"/12.png");
+		image12.setPath(AppConstant.UPLOAD_MATTRESS_DIRECTORY+"/12.png");
 		imageRepository.save(image12);
 		
+		Brand brandTempurPedic = brandRepository.findByName("Tempur-Pedic").get();
+		Brand brandSerta = brandRepository.findByName("Serta").get();
+		Brand brandSealy = brandRepository.findByName("Sealy").get();
+		Brand brandSimmons = brandRepository.findByName("Simmons").get();
+		Brand brandCasper = brandRepository.findByName("Casper").get();
 		
-		Cloth cloth1 = new Cloth();
-		cloth1.setName("Bermuda Short");
-		cloth1.setPrice(20.5);
-		cloth1.setDescription("Awesome cloth");
-		cloth1.setBrand(brandMoiDien);
-		cloth1.setInventories(null);
-		cloth1.setCategory(beachWear);
-		cloth1.setImage(image1);
-		clothRepository.save(cloth1);
+		Category memoryFoamMattress = categoryRepository.findByName("Memory Foam Mattress").get();
+		Category hybridMattress = categoryRepository.findByName("Hybrid Mattress").get();
+		Category latexMattress = categoryRepository.findByName("Latex Mattress").get();
+		Category innerspringMattress = categoryRepository.findByName("Innerspring Mattress").get();
 		
-		// Create and save a Cloth item for Casual Wear
-		Cloth cloth2 = new Cloth();
-		cloth2.setName("Jeans");
-		cloth2.setPrice(60.0);
-		cloth2.setDescription("Classic denim");
-		cloth2.setBrand(brandLevis);
-		cloth2.setInventories(null);
-		cloth2.setImage(image2);
-		cloth2.setCategory(casualWear);
-		clothRepository.save(cloth2);
-
-		// Create and save a Cloth item for Formal Wear
-		Cloth cloth3 = new Cloth();
-		cloth3.setName("Dress Shirt");
-		cloth3.setPrice(45.0);
-		cloth3.setDescription("Sharp and professional");
-		cloth3.setBrand(brandCalvinKlein);
-		cloth3.setInventories(null);
-		cloth3.setImage(image3);
-		cloth3.setCategory(formalWear);
-		clothRepository.save(cloth3);
-
-		// Create and save a Cloth item for Sports Wear
-		Cloth cloth4 = new Cloth();
-		cloth4.setName("Sweatpants");
-		cloth4.setPrice(35.0);
-		cloth4.setDescription("Comfortable for workouts");
-		cloth4.setBrand(brandAristino);
-		cloth4.setInventories(null);
-		cloth4.setImage(image4);
-		cloth4.setCategory(sportsWear);
-		clothRepository.save(cloth4);
-
-		// Create and save a Cloth item for Beach Wear
-		Cloth cloth5 = new Cloth();
-		cloth5.setName("Swim Shorts");
-		cloth5.setPrice(25.0);
-		cloth5.setDescription("Fun and colorful");
-		cloth5.setBrand(brandMoiDien);
-		cloth5.setInventories(null);
-		cloth5.setImage(image5);
-		cloth5.setCategory(beachWear);
-		clothRepository.save(cloth5);
-
-		// Create and save a Cloth item for Casual Wear
-		Cloth cloth6 = new Cloth();
-		cloth6.setName("Hoodie");
-		cloth6.setPrice(50.0);
-		cloth6.setDescription("Warm and cozy");
-		cloth6.setBrand(brandLevis);
-		cloth6.setInventories(null);
-		cloth6.setImage(image6);
-		cloth6.setCategory(casualWear);
-		clothRepository.save(cloth6);
-
-		// Create and save a Cloth item for Sports Wear
-		Cloth cloth7 = new Cloth();
-		cloth7.setName("Running Shorts");
-		cloth7.setPrice(20.0);
-		cloth7.setDescription("Lightweight and breathable");
-		cloth7.setBrand(brandAristino);
-		cloth7.setInventories(null);
-		cloth7.setImage(image7);
-		cloth7.setCategory(sportsWear);
-		clothRepository.save(cloth7);
-
-		// Create and save a Cloth item for Formal Wear
-		Cloth cloth8 = new Cloth();
-		cloth8.setName("Suit Jacket");
-		cloth8.setPrice(120.0);
-		cloth8.setDescription("Sharp and stylish");
-		cloth8.setBrand(brandCalvinKlein);
-		cloth8.setInventories(null);
-		cloth8.setImage(image8);
-		cloth8.setCategory(formalWear);
-		clothRepository.save(cloth8);
-
-		// Create and save a Cloth item for Beach Wear
-		Cloth cloth9 = new Cloth();
-		cloth9.setName("Sun Hat");
-		cloth9.setPrice(15.0);
-		cloth9.setDescription("Great for sun protection");
-		cloth9.setBrand(brandMoiDien);
-		cloth9.setInventories(null);
-		cloth9.setImage(image9);
-		cloth9.setCategory(beachWear);
-		clothRepository.save(cloth9);
-
-		// Create and save a Cloth item for Casual Wear
-		Cloth cloth10 = new Cloth();
-		cloth10.setName("T-Shirt");
-		cloth10.setPrice(18.0);
-		cloth10.setDescription("Simple and comfortable");
-		cloth10.setBrand(brandLevis);
-		cloth10.setInventories(null);
-		cloth10.setImage(image10);
-		cloth10.setCategory(casualWear);
-		clothRepository.save(cloth10);
 		
-		Cloth cloth11 = new Cloth();
-		cloth11.setName("Gucci T-Shirt");
-		cloth11.setPrice(300.0);
-		cloth11.setDescription("Comfortable and stylish t-shirt made by Gucci");
-		cloth11.setBrand(brandGucci);
-		cloth11.setImage(image11);
-		cloth11.setInventories(null);
-		cloth11.setCategory(casualWear);
-		clothRepository.save(cloth11);
+		// Create and save a memory foam mattress from Tempur-Pedic
+		Mattress mattress1 = new Mattress();
+		mattress1.setName("Tempur-Pedic Memory Foam Mattress");
+		mattress1.setPrice(1500.0);
+		mattress1.setDescription("The ultimate in comfort and support");
+		mattress1.setBrand(brandTempurPedic);
+		mattress1.setInventories(null);
+		mattress1.setCategory(memoryFoamMattress);
+		mattress1.setImage(image1);
+		mattressRepository.save(mattress1);
 
-		Cloth cloth12 = new Cloth();
-		cloth12.setName("Gucci Leather Jacket");
-		cloth12.setPrice(1500.0);
-		cloth12.setDescription("Luxurious leather jacket made by Gucci");
-		cloth12.setBrand(brandGucci);
-		cloth12.setImage(image12);
-		cloth12.setInventories(null);
-		cloth12.setCategory(formalWear);
-		clothRepository.save(cloth12);
+		// Create and save a hybrid mattress from Serta
+		Mattress mattress2 = new Mattress();
+		mattress2.setName("Serta Hybrid Mattress");
+		mattress2.setPrice(1200.0);
+		mattress2.setDescription("The perfect combination of foam and springs");
+		mattress2.setBrand(brandSerta);
+		mattress2.setInventories(null);
+		mattress2.setCategory(hybridMattress);
+		mattress2.setImage(image2);
+		mattressRepository.save(mattress2);
+
+		// Create and save a latex mattress from Sealy
+		Mattress mattress3 = new Mattress();
+		mattress3.setName("Sealy Latex Mattress");
+		mattress3.setPrice(1300.0);
+		mattress3.setDescription("A comfortable and eco-friendly choice");
+		mattress3.setBrand(brandSealy);
+		mattress3.setInventories(null);
+		mattress3.setCategory(latexMattress);
+		mattress3.setImage(image3);
+		mattressRepository.save(mattress3);
+
+		// Create and save an innerspring mattress from Simmons
+		Mattress mattress4 = new Mattress();
+		mattress4.setName("Simmons Innerspring Mattress");
+		mattress4.setPrice(1000.0);
+		mattress4.setDescription("Traditional comfort and support");
+		mattress4.setBrand(brandSimmons);
+		mattress4.setInventories(null);
+		mattress4.setCategory(innerspringMattress);
+		mattress4.setImage(image4);
+		mattressRepository.save(mattress4);
+
+		// Create and save a memory foam mattress from Casper
+		Mattress mattress5 = new Mattress();
+		mattress5.setName("Casper Memory Foam Mattress");
+		mattress5.setPrice(1100.0);
+		mattress5.setDescription("Unbeatable comfort and breathability");
+		mattress5.setBrand(brandCasper);
+		mattress5.setInventories(null);
+		mattress5.setCategory(memoryFoamMattress);
+		mattress5.setImage(image5);
+		mattressRepository.save(mattress5);
+
+		// Create and save a hybrid mattress from Tempur-Pedic
+		Mattress mattress6 = new Mattress();
+		mattress6.setName("Tempur-Pedic Hybrid Mattress");
+		mattress6.setPrice(2000.0);
+		mattress6.setDescription("The ultimate in comfort and support, with the perfect combination of foam and springs");
+		mattress6.setBrand(brandTempurPedic);
+		mattress6.setInventories(null);
+		mattress6.setCategory(hybridMattress);
+		mattress6.setImage(image6);
+		mattressRepository.save(mattress6);
+
+		// Create and save a memory foam mattress from Serta
+		Mattress mattress7 = new Mattress();
+		mattress7.setName("Serta Memory Foam Mattress");
+		mattress7.setPrice(1300.0);
+		mattress7.setDescription("Experience the luxury of Serta's premium memory foam mattress");
+		mattress7.setBrand(brandSerta);
+		mattress7.setInventories(null);
+		mattress7.setCategory(memoryFoamMattress);
+		mattress7.setImage(image7);
+		mattressRepository.save(mattress7);
+
+		// Create and save a latex mattress from Sealy
+		Mattress mattress8 = new Mattress();
+		mattress8.setName("Sealy Latex Mattress");
+		mattress8.setPrice(1400.0);
+		mattress8.setDescription("Experience the comfort and support of Sealy's eco-friendly latex mattress");
+		mattress8.setBrand(brandSealy);
+		mattress8.setInventories(null);
+		mattress8.setCategory(latexMattress);
+		mattress8.setImage(image8);
+		mattressRepository.save(mattress8);
+
+		// Create and save an innerspring mattress from Simmons
+		Mattress mattress9 = new Mattress();
+		mattress9.setName("Simmons Beautyrest Innerspring Mattress");
+		mattress9.setPrice(1100.0);
+		mattress9.setDescription("Experience the traditional comfort and support of Simmons Beautyrest innerspring mattress");
+		mattress9.setBrand(brandSimmons);
+		mattress9.setInventories(null);
+		mattress9.setCategory(innerspringMattress);
+		mattress9.setImage(image9);
+		mattressRepository.save(mattress9);
+
+		// Create and save a memory foam mattress from Casper
+		Mattress mattress10 = new Mattress();
+		mattress10.setName("Casper Wave Memory Foam Mattress");
+		mattress10.setPrice(1800.0);
+		mattress10.setDescription("Experience the ultimate luxury with Casper Wave's premium memory foam mattress");
+		mattress10.setBrand(brandCasper);
+		mattress10.setInventories(null);
+		mattress10.setCategory(memoryFoamMattress);
+		mattress10.setImage(image10);
+		mattressRepository.save(mattress10);
+
+		// Create and save a hybrid mattress from Sealy
+		Mattress mattress11 = new Mattress();
+		mattress11.setName("Sealy Hybrid Mattress");
+		mattress11.setPrice(1700.0);
+		mattress11.setDescription("Experience the perfect combination of comfort and support with Sealy's hybrid mattress");
+		mattress11.setBrand(brandSealy);
+		mattress11.setInventories(null);
+		mattress11.setCategory(hybridMattress);
+		mattress11.setImage(image11);
+		mattressRepository.save(mattress11);
+		
+		// Create and save a hybrid mattress from Beautyrest
+		Mattress mattress12 = new Mattress();
+		mattress12.setName("Beautyrest Hybrid Mattress");
+		mattress12.setPrice(1800.0);
+		mattress12.setDescription("Luxury comfort and support");
+		mattress12.setBrand(brandSealy);
+		mattress12.setInventories(null);
+		mattress12.setCategory(hybridMattress);
+		mattress12.setImage(image12);
+		mattressRepository.save(mattress12);
 	}
 	
 	@Order(6)
 	@Test
 	public void addInventory() {
-		Size sizeL = sizeRepository.findByName("L");
-		Size sizeM = sizeRepository.findByName("M");
-		Size sizeXL = sizeRepository.findByName("XL");
-		Size sizeXXL = sizeRepository.findByName("XXL");
-		Size sizeXXXL = sizeRepository.findByName("XXXL");
+		Size sizeTwin = sizeRepository.findByName("Twin");
+		Size sizeTwinXL = sizeRepository.findByName("Twin XL");
+		Size sizeFull = sizeRepository.findByName("Full");
+		Size sizeQueen = sizeRepository.findByName("Queen");
+		Size sizeKing = sizeRepository.findByName("King");
 		
-		// Get cloths
-		Cloth cloth1 = clothRepository.findById(1L).get();
-		Cloth cloth2 = clothRepository.findById(2L).get();
-		Cloth cloth3 = clothRepository.findById(3L).get();
-		Cloth cloth4 = clothRepository.findById(4L).get();
-		Cloth cloth5 = clothRepository.findById(5L).get();
-		Cloth cloth6 = clothRepository.findById(6L).get();
-		Cloth cloth7 = clothRepository.findById(7L).get();
-		Cloth cloth8 = clothRepository.findById(8L).get();
-		Cloth cloth9 = clothRepository.findById(9L).get();
-		Cloth cloth10 = clothRepository.findById(10L).get();
-		Cloth cloth11 = clothRepository.findById(11L).get();
-		Cloth cloth12 = clothRepository.findById(12L).get();
+		// Get mattresss
+		Mattress mattress1 = mattressRepository.findById(1L).get();
+		Mattress mattress2 = mattressRepository.findById(2L).get();
+		Mattress mattress3 = mattressRepository.findById(3L).get();
+		Mattress mattress4 = mattressRepository.findById(4L).get();
+		Mattress mattress5 = mattressRepository.findById(5L).get();
+		Mattress mattress6 = mattressRepository.findById(6L).get();
+		Mattress mattress7 = mattressRepository.findById(7L).get();
+		Mattress mattress8 = mattressRepository.findById(8L).get();
+		Mattress mattress9 = mattressRepository.findById(9L).get();
+		Mattress mattress10 = mattressRepository.findById(10L).get();
+		Mattress mattress11 = mattressRepository.findById(11L).get();
+		Mattress mattress12 = mattressRepository.findById(12L).get();
 		// Create inventory 
 		Inventory inventory1 = new Inventory();
 		inventory1.setQuantity(10);
-		inventory1.setCloth(cloth1);
-		inventory1.setSize(sizeL);
+		inventory1.setMattress(mattress1);
+		inventory1.setSize(sizeTwin);
 		inventoryRepository.save(inventory1);
 		
 		// Create inventory items
 		Inventory inventory2 = new Inventory();
 		inventory2.setQuantity(5);
-		inventory2.setCloth(cloth2);
-		inventory2.setSize(sizeM);
+		inventory2.setMattress(mattress2);
+		inventory2.setSize(sizeTwinXL);
 		inventoryRepository.save(inventory2);
 
 		Inventory inventory3 = new Inventory();
 		inventory3.setQuantity(15);
-		inventory3.setCloth(cloth3);
-		inventory3.setSize(sizeXL);
+		inventory3.setMattress(mattress3);
+		inventory3.setSize(sizeFull);
 		inventoryRepository.save(inventory3);
 
 		Inventory inventory4 = new Inventory();
 		inventory4.setQuantity(20);
-		inventory4.setCloth(cloth4);
-		inventory4.setSize(sizeL);
+		inventory4.setMattress(mattress4);
+		inventory4.setSize(sizeQueen);
 		inventoryRepository.save(inventory4);
 
 		Inventory inventory5 = new Inventory();
 		inventory5.setQuantity(8);
-		inventory5.setCloth(cloth5);
-		inventory5.setSize(sizeXXL);
+		inventory5.setMattress(mattress5);
+		inventory5.setSize(sizeKing);
 		inventoryRepository.save(inventory5);
 
 		Inventory inventory6 = new Inventory();
 		inventory6.setQuantity(3);
-		inventory6.setCloth(cloth6);
-		inventory6.setSize(sizeXXXL);
+		inventory6.setMattress(mattress6);
+		inventory6.setSize(sizeTwin);
 		inventoryRepository.save(inventory6);
 		
 		Inventory inventory7 = new Inventory();
 		inventory7.setQuantity(3);
-		inventory7.setCloth(cloth1);
-		inventory7.setSize(sizeXXXL);
+		inventory7.setMattress(mattress1);
+		inventory7.setSize(sizeTwinXL);
 		inventoryRepository.save(inventory7);
 		
 		Inventory inventory8 = new Inventory();
 		inventory8.setQuantity(4);
-		inventory8.setCloth(cloth8);
-		inventory8.setSize(sizeXXXL);
+		inventory8.setMattress(mattress8);
+		inventory8.setSize(sizeFull);
 		inventoryRepository.save(inventory8);
 		
 		Inventory inventory9 = new Inventory();
 		inventory9.setQuantity(30);
-		inventory9.setCloth(cloth9);
-		inventory9.setSize(sizeXL);
+		inventory9.setMattress(mattress9);
+		inventory9.setSize(sizeKing);
 		inventoryRepository.save(inventory9);
 		
 		Inventory inventory10 = new Inventory();
 		inventory10.setQuantity(30);
-		inventory10.setCloth(cloth10);
-		inventory10.setSize(sizeXXXL);
+		inventory10.setMattress(mattress10);
+		inventory10.setSize(sizeQueen);
 		inventoryRepository.save(inventory10);
 		
 		Inventory inventory11 = new Inventory();
 		inventory11.setQuantity(30);
-		inventory11.setCloth(cloth11);
-		inventory11.setSize(sizeL);
+		inventory11.setMattress(mattress11);
+		inventory11.setSize(sizeTwin);
 		inventoryRepository.save(inventory11);
 		
 		Inventory inventory12 = new Inventory();
 		inventory12.setQuantity(30);
-		inventory12.setCloth(cloth12);
-		inventory12.setSize(sizeXL);
+		inventory12.setMattress(mattress12);
+		inventory12.setSize(sizeTwinXL);
 		inventoryRepository.save(inventory12);
 		
 		Inventory inventory13 = new Inventory();
 		inventory13.setQuantity(15);
-		inventory13.setCloth(cloth7);
-		inventory13.setSize(sizeM);
+		inventory13.setMattress(mattress7);
+		inventory13.setSize(sizeQueen);
 		inventoryRepository.save(inventory12);
 
 	}
@@ -544,40 +543,38 @@ public class InsertData {
 	@Test
 	public void addCartItem() {
 		
-		// Get cloths
-		Cloth cloth1 = clothRepository.findById(1L).get();
-		Cloth cloth2 = clothRepository.findById(2L).get();
-		Cloth cloth3 = clothRepository.findById(3L).get();
+		// Get mattresss
+		Mattress mattress1 = mattressRepository.findById(1L).get();
+		Mattress mattress2 = mattressRepository.findById(2L).get();
+		Mattress mattress3 = mattressRepository.findById(3L).get();
 
 		
 		// For user Khai
 		Cart cartKhai = cartRepository.findById(1L).get();
 		
-		Size sizeL = sizeRepository.findByName("L");
-		Size sizeM = sizeRepository.findByName("M");
-		Size sizeXL = sizeRepository.findByName("XL");
-		Size sizeXXL = sizeRepository.findByName("XXL");
-		Size sizeXXXL = sizeRepository.findByName("XXXL");
-		
+
+		Size sizeQueen = sizeRepository.findByName("Queen");
+		Size sizeKing = sizeRepository.findByName("King");
+		Size sizeTwin = sizeRepository.findByName("Twin");
 		
 		CartItem cartItem1 = new CartItem();
-		cartItem1.setCloth(cloth1);
-		cartItem1.setChoice_size(sizeXXXL);
+		cartItem1.setMattress(mattress1);
+		cartItem1.setChoice_size(sizeQueen);
 		cartItem1.setCart(cartKhai);
 		cartItem1.setQuantity(1);
 		cartItemRepository.save(cartItem1);
 		
 		CartItem cartItem2 = new CartItem();
-		cartItem2.setCloth(cloth2);
+		cartItem2.setMattress(mattress2);
 		cartItem2.setCart(cartKhai);
-		cartItem2.setChoice_size(sizeM);
+		cartItem2.setChoice_size(sizeKing);
 		cartItem2.setQuantity(2);
 		cartItemRepository.save(cartItem2);
 		
 		CartItem cartItem3 = new CartItem();
-		cartItem3.setCloth(cloth3);
+		cartItem3.setMattress(mattress3);
 		cartItem3.setCart(cartKhai);
-		cartItem3.setChoice_size(sizeXL);
+		cartItem3.setChoice_size(sizeTwin);
 		cartItem3.setQuantity(3);
 		cartItemRepository.save(cartItem3);
 		
@@ -685,9 +682,9 @@ public class InsertData {
 	public void addOrderItem() {
 		
 		
-		Cloth cloth1 = clothRepository.findById(1L).get();
-		Cloth cloth2 = clothRepository.findById(2L).get();
-		Cloth cloth3 = clothRepository.findById(3L).get();
+		Mattress mattress1 = mattressRepository.findById(1L).get();
+		Mattress mattress2 = mattressRepository.findById(2L).get();
+		Mattress mattress3 = mattressRepository.findById(3L).get();
 		
 		
 		
@@ -696,19 +693,19 @@ public class InsertData {
 	
 		OrderItem orderItem1 = new OrderItem();
 		orderItem1.setQuantity(2);
-		orderItem1.setCloth(cloth1);
+		orderItem1.setMattress(mattress1);
 		orderItem1.setOrder(orderKhai);
 		orderItemRepository.save(orderItem1);
 		
 		OrderItem orderItem2 = new OrderItem();
 		orderItem2.setQuantity(2);
-		orderItem2.setCloth(cloth2);
+		orderItem2.setMattress(mattress2);
 		orderItem2.setOrder(orderKhai);
 		orderItemRepository.save(orderItem2);
 		
 		OrderItem orderItem3 = new OrderItem();
 		orderItem3.setQuantity(2);
-		orderItem3.setCloth(cloth3);
+		orderItem3.setMattress(mattress3);
 		orderItem3.setOrder(orderKhai);
 		orderItemRepository.save(orderItem3);
 	}

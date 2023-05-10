@@ -11,7 +11,7 @@ import com.mobile.backend.model.Inventory;
 import lombok.Data;
 
 @Data
-public class ClothResponse {
+public class MattressResponse {
 
 	private Long id;
 	

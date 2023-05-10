@@ -23,7 +23,7 @@ public class SecurityConfig {
 	String[] allowURL = {
 			"/api/v1/brands/**",
 			"/api/v1/categories/**",
-			"/api/v1/clothes/**",
+			"/api/v1/mattresses/**",
 			"/api/v1/sizes/**",
 			"/api/v1/users/unique-username",
 			"/api/v1/users/unique-email",

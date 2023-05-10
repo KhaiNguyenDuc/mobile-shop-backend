@@ -28,9 +28,9 @@ public class Inventory {
 	private Integer quantity;
 	
 	@ManyToOne
-	@JoinColumn(name = "cloth_id", referencedColumnName = "id")
+	@JoinColumn(name = "mattress_id", referencedColumnName = "id")
 	@JsonIgnore
-	private Cloth cloth;
+	private Mattress mattress;
 	
 	@ManyToOne
 	@JoinColumn(name="size_id",referencedColumnName = "id")
