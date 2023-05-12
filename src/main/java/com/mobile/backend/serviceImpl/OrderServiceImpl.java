@@ -10,15 +10,18 @@ import org.springframework.stereotype.Service;
 
 import com.mobile.backend.Exception.ResourceNotFoundException;
 import com.mobile.backend.model.Inventory;
+import com.mobile.backend.model.Mattress;
 import com.mobile.backend.model.cart.CartItem;
 import com.mobile.backend.model.order.Order;
 import com.mobile.backend.model.order.OrderItem;
 import com.mobile.backend.model.order.OrderTrack;
 import com.mobile.backend.model.user.User;
 import com.mobile.backend.payload.request.OrderRequest;
+import com.mobile.backend.payload.request.OrderUpdateRequest;
 import com.mobile.backend.payload.response.OrderResponse;
 import com.mobile.backend.repository.CartItemRepository;
 import com.mobile.backend.repository.InventoryRepository;
+import com.mobile.backend.repository.MattressRepository;
 import com.mobile.backend.repository.OrderItemRepository;
 import com.mobile.backend.repository.OrderRepository;
 import com.mobile.backend.repository.OrderTrackRepository;
@@ -49,6 +52,9 @@ public class OrderServiceImpl implements IOrderService {
 	
 	@Autowired
 	OrderTrackRepository orderTrackRepository;
+	
+	@Autowired
+	MattressRepository mattressRepository;
 	
 	@Autowired
 	ModelMapper mapper;
@@ -128,13 +134,18 @@ public class OrderServiceImpl implements IOrderService {
 		order.setOrderDate(new Date());
 		order.setOrderTrack(orderTrack);
 		
+		Order savedOrder =  orderRepository.save(order);
+		
 		for (CartItem cartItem : cartItems) {
 			OrderItem orderItem = new OrderItem();
 			orderItem.setQuantity(cartItem.getQuantity());
 			orderItem.setMattress(cartItem.getMattress());
-			
+			orderItem.setChoice_size(cartItem.getChoice_size());
+			orderItem.setOrder(savedOrder);
 			OrderItem savedOItem =  orderItemRepository.save(orderItem);
-			order.addOrderItems(savedOItem);
+			savedOrder.addOrderItems(savedOItem);
+			
+			
 			
 			Inventory inventory = inventoryRepository.findByMattressAndSize(cartItem.getMattress(),cartItem.getChoice_size())
 					.orElseThrow(() -> new ResourceNotFoundException(AppConstant.INVENTORY_NOT_FOUND));
@@ -144,7 +155,36 @@ public class OrderServiceImpl implements IOrderService {
 			
 		}
 		
-		return orderRepository.save(order);
+		return orderRepository.save(savedOrder);
+	}
+
+	@Override
+	public OrderResponse updateOrderStatus(OrderUpdateRequest orderUpdateRequest) {
+		
+		Order order = orderRepository.findById(orderUpdateRequest.getOrderId())
+				.orElseThrow(() -> new ResourceNotFoundException(AppConstant.ORDER_NOT_FOUND + orderUpdateRequest.getOrderId()));
+		
+		OrderTrack orderTrack = orderTrackRepository.findByStatus(orderUpdateRequest.getStatus())
+				.orElseThrow(() -> new ResourceNotFoundException(AppConstant.ORDER_TRACK_NOT_FOUND + orderUpdateRequest.getStatus()));
+		order.setOrderTrack(orderTrack);
+		
+		// Update sold quantity whenever the order is completed 
+		if(orderTrack.getStatus().equals(AppConstant.COMPLETED)) {
+		
+			List<OrderItem> orderItems = order.getOrderItems();
+			for (OrderItem orderItem : orderItems) {
+			  Mattress mattress = mattressRepository.findById(orderItem.getMattress().getId())
+				.orElseThrow(() -> new ResourceNotFoundException(AppConstant.MATTRESS_NOT_FOUND + orderItem.getMattress().getId()));
+			  
+			  mattress.setSoldQuantity(mattress.getSoldQuantity() + orderItem.getQuantity());
+			  mattressRepository.save(mattress);
+			}
+			
+			
+		}
+		
+		orderRepository.save(order);
+		return mapper.map(order, OrderResponse.class);
 	}
 
 }

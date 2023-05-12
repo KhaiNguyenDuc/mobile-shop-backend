@@ -35,4 +35,6 @@ public class MattressResponse {
 	}
 	
 	private Image image;
+	
+	private Long sold;
 }

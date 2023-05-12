@@ -298,6 +298,7 @@ public class InsertData {
 		mattress1.setInventories(null);
 		mattress1.setCategory(memoryFoamMattress);
 		mattress1.setImage(image1);
+		mattress1.setSoldQuantity(1L);
 		mattressRepository.save(mattress1);
 
 		// Create and save a hybrid mattress from Serta
@@ -309,6 +310,7 @@ public class InsertData {
 		mattress2.setInventories(null);
 		mattress2.setCategory(hybridMattress);
 		mattress2.setImage(image2);
+		mattress2.setSoldQuantity(2L);
 		mattressRepository.save(mattress2);
 
 		// Create and save a latex mattress from Sealy
@@ -320,6 +322,7 @@ public class InsertData {
 		mattress3.setInventories(null);
 		mattress3.setCategory(latexMattress);
 		mattress3.setImage(image3);
+		mattress3.setSoldQuantity(2L);
 		mattressRepository.save(mattress3);
 
 		// Create and save an innerspring mattress from Simmons
@@ -331,6 +334,7 @@ public class InsertData {
 		mattress4.setInventories(null);
 		mattress4.setCategory(innerspringMattress);
 		mattress4.setImage(image4);
+		mattress4.setSoldQuantity(1L);
 		mattressRepository.save(mattress4);
 
 		// Create and save a memory foam mattress from Casper
@@ -342,6 +346,7 @@ public class InsertData {
 		mattress5.setInventories(null);
 		mattress5.setCategory(memoryFoamMattress);
 		mattress5.setImage(image5);
+		mattress5.setSoldQuantity(2L);
 		mattressRepository.save(mattress5);
 
 		// Create and save a hybrid mattress from Tempur-Pedic
@@ -353,6 +358,7 @@ public class InsertData {
 		mattress6.setInventories(null);
 		mattress6.setCategory(hybridMattress);
 		mattress6.setImage(image6);
+		mattress6.setSoldQuantity(3L);
 		mattressRepository.save(mattress6);
 
 		// Create and save a memory foam mattress from Serta
@@ -364,6 +370,7 @@ public class InsertData {
 		mattress7.setInventories(null);
 		mattress7.setCategory(memoryFoamMattress);
 		mattress7.setImage(image7);
+		mattress7.setSoldQuantity(2L);
 		mattressRepository.save(mattress7);
 
 		// Create and save a latex mattress from Sealy
@@ -375,6 +382,7 @@ public class InsertData {
 		mattress8.setInventories(null);
 		mattress8.setCategory(latexMattress);
 		mattress8.setImage(image8);
+		mattress8.setSoldQuantity(3L);
 		mattressRepository.save(mattress8);
 
 		// Create and save an innerspring mattress from Simmons
@@ -386,6 +394,7 @@ public class InsertData {
 		mattress9.setInventories(null);
 		mattress9.setCategory(innerspringMattress);
 		mattress9.setImage(image9);
+		mattress9.setSoldQuantity(2L);
 		mattressRepository.save(mattress9);
 
 		// Create and save a memory foam mattress from Casper
@@ -397,6 +406,7 @@ public class InsertData {
 		mattress10.setInventories(null);
 		mattress10.setCategory(memoryFoamMattress);
 		mattress10.setImage(image10);
+		mattress10.setSoldQuantity(1L);
 		mattressRepository.save(mattress10);
 
 		// Create and save a hybrid mattress from Sealy
@@ -408,6 +418,7 @@ public class InsertData {
 		mattress11.setInventories(null);
 		mattress11.setCategory(hybridMattress);
 		mattress11.setImage(image11);
+		mattress11.setSoldQuantity(1L);
 		mattressRepository.save(mattress11);
 		
 		// Create and save a hybrid mattress from Beautyrest
@@ -419,6 +430,7 @@ public class InsertData {
 		mattress12.setInventories(null);
 		mattress12.setCategory(hybridMattress);
 		mattress12.setImage(image12);
+		mattress12.setSoldQuantity(1L);
 		mattressRepository.save(mattress12);
 	}
 	
@@ -553,13 +565,13 @@ public class InsertData {
 		Cart cartKhai = cartRepository.findById(1L).get();
 		
 
-		Size sizeQueen = sizeRepository.findByName("Queen");
-		Size sizeKing = sizeRepository.findByName("King");
 		Size sizeTwin = sizeRepository.findByName("Twin");
+		Size sizeTwinXL = sizeRepository.findByName("Twin XL");
+		Size sizeFull = sizeRepository.findByName("Full");
 		
 		CartItem cartItem1 = new CartItem();
 		cartItem1.setMattress(mattress1);
-		cartItem1.setChoice_size(sizeQueen);
+		cartItem1.setChoice_size(sizeTwin);
 		cartItem1.setCart(cartKhai);
 		cartItem1.setQuantity(1);
 		cartItemRepository.save(cartItem1);
@@ -567,14 +579,14 @@ public class InsertData {
 		CartItem cartItem2 = new CartItem();
 		cartItem2.setMattress(mattress2);
 		cartItem2.setCart(cartKhai);
-		cartItem2.setChoice_size(sizeKing);
+		cartItem2.setChoice_size(sizeTwinXL);
 		cartItem2.setQuantity(2);
 		cartItemRepository.save(cartItem2);
 		
 		CartItem cartItem3 = new CartItem();
 		cartItem3.setMattress(mattress3);
 		cartItem3.setCart(cartKhai);
-		cartItem3.setChoice_size(sizeTwin);
+		cartItem3.setChoice_size(sizeFull);
 		cartItem3.setQuantity(3);
 		cartItemRepository.save(cartItem3);
 		
@@ -686,7 +698,9 @@ public class InsertData {
 		Mattress mattress2 = mattressRepository.findById(2L).get();
 		Mattress mattress3 = mattressRepository.findById(3L).get();
 		
-		
+		Size sizeTwin = sizeRepository.findByName("Twin");
+		Size sizeTwinXL = sizeRepository.findByName("Twin XL");
+		Size sizeFull = sizeRepository.findByName("Full");
 		
 		com.mobile.backend.model.order.Order orderKhai = orderRepository.findById(1L).get();
 		
@@ -695,18 +709,21 @@ public class InsertData {
 		orderItem1.setQuantity(2);
 		orderItem1.setMattress(mattress1);
 		orderItem1.setOrder(orderKhai);
+		orderItem1.setChoice_size(sizeTwin);
 		orderItemRepository.save(orderItem1);
 		
 		OrderItem orderItem2 = new OrderItem();
 		orderItem2.setQuantity(2);
 		orderItem2.setMattress(mattress2);
 		orderItem2.setOrder(orderKhai);
+		orderItem2.setChoice_size(sizeTwinXL);
 		orderItemRepository.save(orderItem2);
 		
 		OrderItem orderItem3 = new OrderItem();
 		orderItem3.setQuantity(2);
 		orderItem3.setMattress(mattress3);
 		orderItem3.setOrder(orderKhai);
+		orderItem3.setChoice_size(sizeFull);
 		orderItemRepository.save(orderItem3);
 	}
 	

@@ -24,4 +24,8 @@ public interface IMattressService {
 
 	Image getImagesById(Long mattressId);
 
+	List<MattressResponse> getTop3LatesMattresses();
+
+	List<MattressResponse> getTop3BestSeller();
+
 }

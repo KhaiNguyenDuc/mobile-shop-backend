@@ -2,6 +2,7 @@ package com.mobile.backend.model.order;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.mobile.backend.model.Mattress;
+import com.mobile.backend.model.Size;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -34,6 +35,10 @@ public class OrderItem {
 	@ManyToOne
 	@JoinColumn(name = "mattress_id", referencedColumnName = "id")
 	private Mattress mattress;
+	
+	@ManyToOne
+	@JoinColumn(name="size_id",referencedColumnName = "id")
+	private Size choice_size;
 
 	public Double getTotalPrice() {
 		return quantity * mattress.getPrice();

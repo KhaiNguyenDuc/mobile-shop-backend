@@ -14,5 +14,9 @@ public interface MattressRepository extends JpaRepository<Mattress, Long> {
 	List<Mattress> findByCategory(Category category);
 
 	List<Mattress> findByBrand(Brand brand);
+	
+    List<Mattress> findTop3ByOrderByCreateAtDesc();
+
+	List<Mattress> findTop3ByOrderBySoldQuantityDesc();
 
 }

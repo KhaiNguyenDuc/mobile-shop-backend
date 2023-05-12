@@ -27,7 +27,9 @@ import lombok.Setter;
 @AllArgsConstructor
 @NoArgsConstructor
 @Table(name = "mattresses")
-public class Mattress {
+public class Mattress extends UserDateAudit {
+
+	private static final long serialVersionUID = 1L;
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY )
@@ -42,6 +44,8 @@ public class Mattress {
 	@Column(name="description")
 	private String description;
 	
+	@Column(name="sold")
+	private Long soldQuantity;
 	
 	@ManyToOne
 	@JoinColumn(name="brand_id", referencedColumnName = "id")
@@ -61,6 +65,9 @@ public class Mattress {
 	@OneToMany(mappedBy = "mattress")
 	@JsonIgnore
 	private List<OrderItem> orderItems;
+	
+	
+	
 	
 	@OneToOne
 	@JoinColumn(name="image_id",referencedColumnName = "id")

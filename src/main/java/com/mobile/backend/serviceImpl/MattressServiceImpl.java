@@ -56,9 +56,9 @@ public class MattressServiceImpl implements IMattressService {
 	
 	@Override
 	public List<MattressResponse> getAllMattresses() {
-		List<Mattress> Mattresses = mattressRepository.findAll();
+		List<Mattress> mattresses = mattressRepository.findAll();
 		List<MattressResponse> mattressResponses = 
-				Arrays.asList(mapper.map(Mattresses, MattressResponse[].class));
+				Arrays.asList(mapper.map(mattresses, MattressResponse[].class));
 		return mattressResponses;
 	}
 
@@ -158,6 +158,22 @@ public class MattressServiceImpl implements IMattressService {
 				.orElseThrow(() -> new ResourceNotFoundException(AppConstant.MATTRESS_NOT_FOUND+mattressId));
 		
 		return mattress.getImage();
+	}
+
+	@Override
+	public List<MattressResponse> getTop3LatesMattresses() {
+		List<Mattress> mattresses = mattressRepository.findTop3ByOrderByCreateAtDesc();
+		List<MattressResponse> mattressResponses = 
+				Arrays.asList(mapper.map(mattresses, MattressResponse[].class));
+		return mattressResponses;
+	}
+
+	@Override
+	public List<MattressResponse> getTop3BestSeller() {
+		List<Mattress> mattresses = mattressRepository.findTop3ByOrderBySoldQuantityDesc();
+		List<MattressResponse> mattressResponses = 
+				Arrays.asList(mapper.map(mattresses, MattressResponse[].class));
+		return mattressResponses;
 	}
 
 }

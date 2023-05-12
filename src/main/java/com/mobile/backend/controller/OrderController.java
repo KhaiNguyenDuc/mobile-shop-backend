@@ -9,11 +9,13 @@ import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.mobile.backend.payload.request.OrderRequest;
+import com.mobile.backend.payload.request.OrderUpdateRequest;
 import com.mobile.backend.payload.response.OrderResponse;
 import com.mobile.backend.security.CurrentUser;
 import com.mobile.backend.security.UserPrincipal;
@@ -55,5 +57,15 @@ public class OrderController {
 			@RequestBody OrderRequest orderRequest){
 		OrderResponse order = orderService.submitOrder(userPrincipal.getId(),orderRequest);
 		return new ResponseEntity<>(order,HttpStatus.OK);
+	}
+	
+	@PutMapping("/update")
+	@PreAuthorize("hasRole('ADMIN')")
+	public ResponseEntity<OrderResponse> updateOrderStatus(
+			@RequestBody OrderUpdateRequest orderUpdateRequest){
+		
+		OrderResponse order = orderService.updateOrderStatus(orderUpdateRequest);
+		return new ResponseEntity<>(order,HttpStatus.OK);
+		
 	}
 }

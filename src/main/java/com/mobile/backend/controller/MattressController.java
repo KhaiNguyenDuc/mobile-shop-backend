@@ -89,4 +89,16 @@ public class MattressController {
 		}
 
 	}
+	
+	@GetMapping(value="/latest")
+	public ResponseEntity<List<MattressResponse>> getTop3LatestMattress(){
+		List<MattressResponse> mattresses = mattressService.getTop3LatesMattresses();
+		return new ResponseEntity<>(mattresses,HttpStatus.OK);
+	}
+	
+	@GetMapping(value="/best-seller")
+	public ResponseEntity<List<MattressResponse>> getTop3BestSeller(){
+		List<MattressResponse> mattresses = mattressService.getTop3BestSeller();
+		return new ResponseEntity<>(mattresses,HttpStatus.OK);
+	}
 }

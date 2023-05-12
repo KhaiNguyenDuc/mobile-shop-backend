@@ -4,6 +4,7 @@ import java.time.LocalDate;
 import java.util.List;
 
 import com.mobile.backend.model.Image;
+import com.mobile.backend.model.UserDateAudit;
 import com.mobile.backend.model.cart.Cart;
 import com.mobile.backend.model.order.Order;
 
@@ -27,7 +28,9 @@ import lombok.Setter;
 @Table(name = "users")
 @Getter
 @Setter
-public class User {
+public class User extends UserDateAudit{
+
+	private static final long serialVersionUID = 1L;
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)

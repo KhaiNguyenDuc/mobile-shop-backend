@@ -25,7 +25,7 @@ public class BrandServiceImpl implements IBrandService{
 	BrandRepository brandRepository;
 	
 	@Autowired
-	MattressRepository clothRepository;
+	MattressRepository mattressRepository;
 	
 	@Autowired
 	ModelMapper mapper;
@@ -51,7 +51,7 @@ public class BrandServiceImpl implements IBrandService{
 	public List<MattressResponse> getMattressesByBrandId(Long brandId) {
 		Brand brand = brandRepository.findById(brandId)
 				.orElseThrow(() -> new ResourceNotFoundException(AppConstant.BRAND_NOT_FOUND+brandId));
-		List<Mattress> clothes = clothRepository.findByBrand(brand);
+		List<Mattress> clothes = mattressRepository.findByBrand(brand);
 		List<MattressResponse> clothResponses = 
 				Arrays.asList(mapper.map(clothes, MattressResponse[].class));
 		return clothResponses;

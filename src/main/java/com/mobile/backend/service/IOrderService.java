@@ -3,6 +3,7 @@ package com.mobile.backend.service;
 import java.util.List;
 
 import com.mobile.backend.payload.request.OrderRequest;
+import com.mobile.backend.payload.request.OrderUpdateRequest;
 import com.mobile.backend.payload.response.OrderResponse;
 
 public interface IOrderService {
@@ -14,5 +15,7 @@ public interface IOrderService {
 	List<OrderResponse> getCurrentOrderByUserId(Long id);
 
 	OrderResponse submitOrder(Long id, OrderRequest orderRequest);
+
+	OrderResponse updateOrderStatus(OrderUpdateRequest orderUpdateRequest);
 
 }
