@@ -8,6 +8,7 @@ import org.springframework.web.multipart.MultipartFile;
 import com.mobile.backend.model.Image;
 import com.mobile.backend.payload.request.UserProfileRequest;
 import com.mobile.backend.payload.request.UserRequest;
+import com.mobile.backend.payload.request.UserStatusRequest;
 import com.mobile.backend.payload.response.CartResponse;
 import com.mobile.backend.payload.response.OrderResponse;
 import com.mobile.backend.payload.response.UserProfileResponse;
@@ -41,6 +42,8 @@ public interface IUserService {
 	UserProfileResponse uploadImage(MultipartFile file, UserPrincipal userPrincipal) throws IOException;
 
 	Image getImagesById(UserPrincipal userPrincipal);
+
+	UserResponse updateUserStatus(UserStatusRequest userStatusRequest);
 
 
 }

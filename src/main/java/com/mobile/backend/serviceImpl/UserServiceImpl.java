@@ -22,6 +22,7 @@ import com.mobile.backend.model.user.RoleName;
 import com.mobile.backend.model.user.User;
 import com.mobile.backend.payload.request.UserProfileRequest;
 import com.mobile.backend.payload.request.UserRequest;
+import com.mobile.backend.payload.request.UserStatusRequest;
 import com.mobile.backend.payload.response.CartResponse;
 import com.mobile.backend.payload.response.OrderResponse;
 import com.mobile.backend.payload.response.UserProfileResponse;
@@ -232,6 +233,17 @@ public class UserServiceImpl implements IUserService {
 				.orElseThrow(() -> new ResourceNotFoundException(AppConstant.USER_ID_NOT_FOUND+userPrincipal.getId()));
 		
 		return user.getImage();
+	}
+
+	@Override
+	public UserResponse updateUserStatus(UserStatusRequest userStatusRequest) {
+		User user = userRepository.findById(userStatusRequest.getUserId())
+				.orElseThrow(() -> new ResourceNotFoundException(AppConstant.USER_ID_NOT_FOUND + userStatusRequest.getUserId()));
+		
+		user.setEnabled(userStatusRequest.getIsEnabled());
+		userRepository.save(user);
+		
+		return mapper.map(user, UserResponse.class);
 	}
 
 	
