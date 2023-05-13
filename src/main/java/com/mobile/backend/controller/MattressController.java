@@ -101,4 +101,10 @@ public class MattressController {
 		List<MattressResponse> mattresses = mattressService.getTop3BestSeller();
 		return new ResponseEntity<>(mattresses,HttpStatus.OK);
 	}
+	
+	 @GetMapping("/search")
+     public ResponseEntity<List<MattressResponse>> searchProducts(@RequestParam("query") String query){
+	 	List<MattressResponse> mattresses = mattressService.searchProducts(query);
+		return new ResponseEntity<>(mattresses,HttpStatus.OK);
+     }
 }

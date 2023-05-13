@@ -176,4 +176,12 @@ public class MattressServiceImpl implements IMattressService {
 		return mattressResponses;
 	}
 
+	@Override
+	public List<MattressResponse> searchProducts(String query) {
+		List<Mattress> mattresses = mattressRepository.searchProducts(query);
+		List<MattressResponse> mattressResponses = 
+				Arrays.asList(mapper.map(mattresses, MattressResponse[].class));
+		return mattressResponses;
+	}
+
 }

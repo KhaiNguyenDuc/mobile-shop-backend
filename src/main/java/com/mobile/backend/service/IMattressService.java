@@ -28,4 +28,6 @@ public interface IMattressService {
 
 	List<MattressResponse> getTop3BestSeller();
 
+	List<MattressResponse> searchProducts(String query);
+
 }
