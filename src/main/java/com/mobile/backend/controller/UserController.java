@@ -154,4 +154,19 @@ public class UserController {
 		return new ResponseEntity<>(userResponse, HttpStatus.OK);
 	}
 	
+	// Get Image
+		@GetMapping(value = "/{user_id}/images", produces = MediaType.IMAGE_PNG_VALUE)
+		public ResponseEntity<InputStreamResource> getImages(@PathVariable("user_id") Long userId) {
+
+			Image image = userService.getImagesById(userId);
+
+			try {
+				InputStream in = getClass().getResourceAsStream(image.getPath());
+
+				return ResponseEntity.ok().contentType(MediaType.IMAGE_PNG).body(new InputStreamResource(in));
+			} catch (Exception e) {
+				throw new ResourceNotFoundException(AppConstant.USER_IMAGE_NOT_FOUND);
+			}
+		}
+	
 }

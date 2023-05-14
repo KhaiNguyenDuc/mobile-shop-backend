@@ -246,5 +246,13 @@ public class UserServiceImpl implements IUserService {
 		return mapper.map(user, UserResponse.class);
 	}
 
+	@Override
+	public Image getImagesById(Long userId) {
+		User user = userRepository.findById(userId)
+				.orElseThrow(() -> new ResourceNotFoundException(AppConstant.USER_ID_NOT_FOUND+userId));
+		
+		return user.getImage();
+	}
+
 	
 }

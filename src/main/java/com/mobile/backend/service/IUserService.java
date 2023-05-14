@@ -45,5 +45,7 @@ public interface IUserService {
 
 	UserResponse updateUserStatus(UserStatusRequest userStatusRequest);
 
+	Image getImagesById(Long userId);
+
 
 }
