@@ -58,6 +58,8 @@ public class SecurityConfig {
 					.permitAll()
 				.requestMatchers("/api/v1/auth/**")
 					.permitAll()
+				.requestMatchers("/api/v1/users/*/images")
+					.permitAll()
 				.anyRequest()
 					.authenticated()
 				.and()

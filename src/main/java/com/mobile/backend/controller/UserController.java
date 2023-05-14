@@ -155,7 +155,6 @@ public class UserController {
 	}
 	
 	// Get Image
-	@PreAuthorize("hasRole('USER')")
 	@GetMapping(value = "/{user_id}/images", produces = MediaType.IMAGE_PNG_VALUE)
 	public ResponseEntity<InputStreamResource> getImages(@PathVariable("user_id") Long userId) {
 
