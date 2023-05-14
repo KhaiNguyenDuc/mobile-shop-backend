@@ -107,4 +107,6 @@ public class MattressController {
 	 	List<MattressResponse> mattresses = mattressService.searchProducts(query);
 		return new ResponseEntity<>(mattresses,HttpStatus.OK);
      }
+	 
+	 
 }
